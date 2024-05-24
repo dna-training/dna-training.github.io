@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const content = document.getElementById('content');
+    let challenges = [];
+    let currentChallengeIndex = localStorage.getItem('currentChallengeIndex') ? parseInt(localStorage.getItem('currentChallengeIndex')) : 0;
 
     function loadTemplate(template) {
         fetch(`templates/${template}.html`)
@@ -24,16 +26,29 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
+    function updateProgress(status) {
+        if (status === 'correct') {
+            loadTemplate('correct')
+            /*currentChallengeIndex++;
+            localStorage.setItem('currentChallengeIndex', currentChallengeIndex);
+            if (currentChallengeIndex < challenges.length) {
+                loadChallenge(challenges[currentChallengeIndex]);
+            } else {
+                content.innerHTML = '<h1>All challenges completed!</h1>';
+            }*/
+        } else {
+            loadTemplate('wrong');
+        }
+    }
+
     function handleRouting() {
         const path = window.location.pathname.split('/').filter(segment => segment);
-        if (path.length === 1) {
-            const challengeDate = path[0];
-            loadChallenge(challengeDate);
-        } else if (path.length === 2) {
-            const challengeDate = path[0];
-            const status = path[1];
+        if (path.length === 0) {
+            loadChallenge(challenges[currentChallengeIndex]);
+        } else if (path.length === 1) {
+            const status = path[0];
             if (status === 'correct' || status === 'wrong') {
-                loadTemplate(status);
+                updateProgress(status);
             } else {
                 content.innerHTML = '<h1>404 Not Found</h1>';
             }
@@ -42,7 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function fetchChallenges() {
+        fetch('challenges/challenges.json')
+            .then(response => response.json())
+            .then(data => {
+                challenges = data;
+                handleRouting();
+            })
+            .catch(() => {
+                content.innerHTML = '<h1>Error loading challenges</h1>';
+            });
+    }
+
     window.addEventListener('popstate', handleRouting);
 
-    handleRouting();
+    fetchChallenges();
 });
