@@ -1,0 +1,4 @@
+Minha cabeça
+-> ping localhost
+
+Resposta: ping localhost

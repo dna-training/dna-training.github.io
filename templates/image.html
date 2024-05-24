@@ -1,0 +1,2157 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
+	<script> 
+		function getID() {
+			return window.location.pathname.split('/desafio/')[1]
+		}
+		function getAnswer(callback) {
+			$.getJSON(`../static/images/desafio${getID()}.json`, function(data) {
+				callback(data.resposta);
+			})
+		}
+		function getDetailedAnswer(callback) {
+			$.get(`../static/images/resposta${getID()}.txt`, function(data) {
+				callback(data)
+			}, 'text');
+		}
+		function resposta() {
+			getDetailedAnswer(function(txt) {
+				alert(txt);
+			})
+		}
+	</script>
+	<script language="javascript">
+	
+		
+    function chamaDepoimento(pagina,valor){
+	
+	  document.frmDepoimento.action = pagina;
+	  document.frmDepoimento.id_dep.value = valor;
+	  document.frmDepoimento.submit();
+	
+	}
+function f_action(obj) {
+  var obj = document.getElementById(obj);
+  obj.action = document.location;
+  obj.submit();
+}
+
+function verificaCaracter(evento)
+{
+	var reg = /[áéíúóÁÉÍÓÚâêôÂÊÔçÇa-zA-Z0-9@#$%&*_()+-=!?., ]/;
+	var keyCode = evento.keyCode ? evento.keyCode : evento.which ? evento.which : evento.charCode;
+	reg.test(String.fromCharCode(keyCode));
+	if(reg.test(String.fromCharCode(keyCode))||(keyCode==8)||(keyCode==9)){
+		return true;
+	}
+	else
+	{
+		alert('Não é permitido o uso de alguns caracteres especiais!');
+		return false;
+	}
+}
+
+function enter(obj,evnt){
+  var obj = document.getElementById(obj);
+  var keyCode = evnt.keyCode ? evnt.keyCode : evnt.which ? evnt.which : evnt.charCode;
+  if (keyCode == 13) {
+     keyCode = 0;
+	 enviar()
+  }
+}
+
+  function valida_comunidade(par){
+   if (par == "1"){
+   if (document.frmListaGrupos.cmbUF.value == ""){
+     alert("Informe a UF do grupo");
+	 document.frmListaGrupos.cmbUF.focus();
+	 return false;
+   }}
+     document.frmListaGrupos.action = 'dna_lista_grupos_detalhe.asp?par=' + par;
+     document.frmListaGrupos.submit(); 
+  }
+
+  function valida_contato(){
+   if (document.frm_contato.email.value == ""){
+     alert("Informe o email");
+	 document.frm_contato.email.focus();
+	 return false;
+   }
+  }
+
+  function valida_cad_pat(){
+   if (document.frm_cadastro_pat.nome.value == ""){
+     alert("Informe o nome da pessoa para contato");
+	 document.frm_cadastro_pat.nome.focus();
+	 return false;
+   }
+   if (document.frm_cadastro_pat.email.value == ""){
+     alert("Informe o email");
+	 document.frm_cadastro_pat.email.focus();
+	 return false;
+   }
+   if (document.frm_cadastro_pat.telefone.value == ""){
+     alert("Informe o telefone para contato");
+	 document.frm_cadastro_pat.telefone.focus();
+	 return false;
+   }
+  }
+
+  
+  function valida_login(obj){
+  var obj = document.getElementById(obj);
+  if ((obj.username.value == "") && (obj.password.value == "")) {
+   return false;
+  }
+  obj.submit();
+  }
+
+  function joga_foco(campo){
+   var campo = document.getElementById(campo);
+   campo.focus();
+   return true;
+  }
+
+
+/* Create a new XMLHttpRequest object to talk to the Web server */
+//var xmlHttp = false;
+/*@cc_on @*/
+/*if (@_jscript_version >= 5)
+try {
+  xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+} catch (e) {
+  try {
+    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+  } catch (e2) {
+    xmlHttp = false;
+  }
+}
+
+if (!xmlHttp && typeof XMLHttpRequest != 'undefined') {
+  xmlHttp = new XMLHttpRequest();
+} */
+
+
+
+
+   function relogio(){
+       var url = "dna_hora_servidor.asp";
+	   
+	  // sec = 39;
+	   
+	  // sec = 60 - sec;
+	   
+       xmlHttp.open("POST", url, true);
+	   
+	   xmlHttp.onreadystatechange = atualizaRelogio;
+  
+       xmlHttp.send(true);
+  
+       lrelogio = setTimeout("relogio()", 1000);
+	  /* Data = new Date();
+	   var hh = Data.getHours();
+	   var mm = Data.getMinutes();
+	   var ss = Data.getSeconds();
+	   var dia = Data.getDate();
+	   var mes = Data.getMonth() + 1;
+	   var ano = Data.getFullYear();
+	   var meses = new Array();
+	   meses[1] = "Janeiro";
+	   meses[2] = "Fevereiro";
+	   meses[3] = "Março";
+	   meses[4] = "Abril";
+	   meses[5] = "Maio";
+	   meses[6] = "Junho";
+	   meses[7] = "Julho";
+	   meses[8] = "Agosto";
+	   meses[9] = "Setembro";
+	   meses[10] = "Outubro";
+	   meses[11] = "Novembro";
+	   meses[12] = "Dezembro";
+
+		var hora = "" + ((hh < 10) ? "0" : "") + hh;
+			hora += ((mm < 10) ? ":0" : ":") + mm;
+			hora += ((ss < 10) ? ":0" : ":") + ss; 
+	
+		if (dia <= 9){
+		 xdia = "0" + dia;
+		} else {
+		 xdia = dia; 
+		} 
+		document.all("dna_menu_esq").innerHTML = xdia + " de " + meses[mes] + " de " + ano + " | " + hora;
+	   lrelogio = setTimeout("relogio()", 1000); */
+	
+   }
+
+
+   function relogio_jogo(){
+       var url = "dna_hora_servidor_jogo.asp";
+	   
+	   xmlHttp.open("POST", url, true);
+	   
+	   xmlHttp.onreadystatechange = atualizaRelogioJogo;
+  
+       xmlHttp.send(true);
+  
+       lrelogio = setTimeout("relogio_jogo()", 1000);
+	/*   Data = new Date();
+	   var hh = Data.getHours();
+	   var mm = Data.getMinutes();
+	   var ss = Data.getSeconds();
+	   var dia = Data.getDate();
+	   var mes = Data.getMonth() + 1;
+	   var ano = Data.getFullYear();
+	   var meses = new Array();
+	   meses[1] = "Janeiro";
+	   meses[2] = "Fevereiro";
+	   meses[3] = "Março";
+	   meses[4] = "Abril";
+	   meses[5] = "Maior";
+	   meses[6] = "Junho";
+	   meses[7] = "Julho";
+	   meses[8] = "Agosto";
+	   meses[9] = "Setembro";
+	   meses[10] = "Outubro";
+	   meses[11] = "Novembro";
+	   meses[12] = "Dezembro";
+
+		var hora = "" + ((hh < 10) ? "0" : "") + hh;
+			hora += ((mm < 10) ? ":0" : ":") + mm;
+			hora += ((ss < 10) ? ":0" : ":") + ss; 
+	
+		if (dia <= 9){
+		 xdia = "0" + dia;
+		} else {
+		 xdia = dia; 
+		} 
+
+		if (mes <= 9){
+		 xmes = "0" + mes;
+		} else {
+		 xmes = mes; 
+		} 
+
+
+		document.all("skin_lat003").innerHTML = xdia + "/" + xmes + "/" + ano + " | " + hora;
+	   lrelogio = setTimeout("relogio_jogo()", 1000); */
+	
+   }
+
+
+
+function atualizaRelogio(){
+  if (xmlHttp.readyState == 4) {
+     var response = xmlHttp.responseText;
+	   document.getElementById("dna_menu_esq").innerHTML = response;
+  }
+}
+
+function atualizaRelogioJogo(){
+  if (xmlHttp.readyState == 4) {
+     var response = xmlHttp.responseText;
+	   document.getElementById("skin_lat003").innerHTML = response;
+  }
+}
+
+
+//   Função para pegar a data-->
+
+
+
+function gettheDate() {
+
+               Todays = new Date();
+
+               TheDate = "     " + Todays.getDate() +" / "+ (Todays.getMonth() + 1) + " / " +  
+
+               Todays.getFullYear() 
+
+               document.clock.date.value = TheDate;
+
+}
+
+var timerID = null;
+
+var timerRunning = false;
+
+
+
+//  Final da Função -->
+
+
+
+function stopclock (){
+
+        if(timerRunning);
+
+                clearTimeout(timerID);
+
+        timerRunning = false;
+
+    }
+
+
+
+//  - - - - - - - - Inicializa o Clock-->
+
+
+
+function startclock () {
+
+        stopclock();
+
+        gettheDate()
+
+        showtime();
+
+    }
+
+//  - - - - - - - -  Mostra a Hora-->
+
+
+
+function showtime () {
+
+        var now = new Date();
+
+        var hours = now.getHours();
+
+        var minutes = now.getMinutes();
+
+        var seconds = now.getSeconds()
+
+        var timeValue = "" + ((hours >12) ? hours -12 :hours)
+
+        timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+
+        timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+
+        timeValue += (hours >= 12) ? " P.M." : " A.M."
+
+        document.clock.face.value = timeValue;
+
+        // you could replace the above with this
+
+        // and have a clock on the status bar:
+
+        // window.status = timeValue;
+
+        timerID = setTimeout("showtime()",1000);
+
+        timerRunning = true;
+
+    }
+
+// - - - - - - - -   Final do código JavaScript --->
+
+
+
+function Inicio(){
+
+}
+
+function MO2(e)
+{
+if (!e)
+var e=window.event;
+var S=e.srcElement;
+while (S.tagName!="TR")
+{S=S.parentElement;}
+S.className="T";
+}
+
+function MU2(e)
+{
+if (!e)
+var e=window.event;
+var S=e.srcElement;
+while (S.tagName!="TR")
+{S=S.parentElement;}
+S.className="P";
+}
+function MO(e)
+{
+if (!e)
+var e=window.event;
+var S=e.srcElement;
+while (S.tagName!="TD")
+{S=S.parentElement;}
+S.className="T";
+}
+
+function MU(e)
+{
+if (!e)
+var e=window.event;
+var S=e.srcElement;
+while (S.tagName!="TD")
+{S=S.parentElement;}
+S.className="P";
+}
+
+/*
+ Padawan's JavaScript-Mega-Validator 3000+
+ Todos os direitos reservados para Diego Pires Plentz
+ Você pode usar esse código nas suas páginas desde que mantenha os créditos ;-)
+ */
+ 
+ //Verifica qual o browser do visitante e armazena na variável púbica clientNavigator,
+ //Caso Internet Explorer(IE) outros (Other)
+ if (navigator.appName.indexOf('Microsoft') != -1){
+ 	clientNavigator = "IE";
+ }else{
+ 	clientNavigator = "Other";
+ }
+ function Verifica_Data(data, obrigatorio){
+ //Se o parâmetro obrigatório for igual à zero, significa que elepode estar vazio, caso contrário, não
+  var data = document.getElementById(data);
+ 	var strdata = data.value;
+ 	if((obrigatorio == 1) || (obrigatorio == 0 && strdata != "")){
+ 		//Verifica a quantidade de digitos informada esta correta.
+ 		if (strdata.length != 10){
+ 			alert("Formato da data não é válido. Formato correto: - dd/mm/aaaa.");
+			data.style.borderColor = "red";
+			data.focus();
+ 			return false
+ 		}
+		else
+		{
+		
+		}
+ 		//Verifica máscara da data
+ 		if ("/" != strdata.substr(2,1) || "/" != strdata.substr(5,1)){
+ 			alert("Formato da data não é válido. Formato correto: - dd/mm/aaaa.");
+ 			data.focus();
+ 			return false
+ 		}
+ 		dia = strdata.substr(0,2)
+ 		mes = strdata.substr(3,2);
+ 		ano = strdata.substr(6,4);
+ 		//Verifica o dia
+ 		if (isNaN(dia) || dia > 31 || dia < 1){
+ 			alert("Formato do dia não é válido.");
+			data.style.borderColor = "red";
+ 			data.focus();
+ 			return false
+ 		}
+ 		if (mes == 4 || mes == 6 || mes == 9 || mes == 11){
+ 			if (dia == "31"){
+ 				alert("O mês informado não possui 31 dias.");
+				data.style.borderColor = "red";
+ 				data.focus();
+ 				return false
+ 			}
+ 		}
+ 		if (mes == "02"){
+ 			bissexto = ano % 4;
+ 			if (bissexto == 0){
+ 				if (dia > 29){
+ 					alert("O mês informado possui somente 29 dias.");
+					data.style.borderColor = "red";
+ 					data.focus();
+ 					return false
+ 				}
+ 			}else{
+ 				if (dia > 28){
+ 					alert("O mês informado possui somente 28 dias.");
+					data.style.borderColor = "red";
+ 					data.focus();
+ 					return false
+ 				}
+ 			}
+ 		}
+ 	//Verifica o mês
+ 		if (isNaN(mes) || mes > 12 || mes < 1){
+ 			alert("Formato do mês não é válido.");
+			data.style.borderColor = "red";
+ 			data.focus();
+ 			return false
+ 		}
+ 		//Verifica o ano
+ 		if (isNaN(ano)){
+ 			alert("Formato do ano não é válido.");
+			data.style.borderColor = "red";
+ 			data.focus();
+ 			return false
+ 		}
+ 	}
+ data.style.borderColor = "#6B9ED6";
+ }
+ 
+ function Compara_Datas(data_inicial, data_final){
+ 	//Verifica se a data inicial é maior que a data final
+ 	var data_inicial = document.getElementById(data_inicial);
+ 	var data_final   = document.getElementById(data_final);
+ 	str_data_inicial = data_inicial.value;
+ 	str_data_final   = data_final.value;
+ 	dia_inicial      = data_inicial.value.substr(0,2);
+ 	dia_final        = data_final.value.substr(0,2);
+ 	mes_inicial      = data_inicial.value.substr(3,2);
+ 	mes_final        = data_final.value.substr(3,2);
+ 	ano_inicial      = data_inicial.value.substr(6,4);
+ 	ano_final        = data_final.value.substr(6,4);
+ 	if(ano_inicial > ano_final){
+ 		alert("A data inicial deve ser menor que a data final."); 
+ 		data_inicial.focus();
+ 		return false
+ 	}else{
+  	if(ano_inicial == ano_final){
+   	if(mes_inicial > mes_final){
+    	alert("A data inicial deve ser menor que a data final.");
+ 				data_final.focus();
+ 				return false
+ 			}else{
+ 				if(mes_inicial == mes_final){
+ 					if(dia_inicial > dia_final){
+ 						alert("A data inicial deve ser menor que a data final.");
+ 						data_final.focus();
+ 						return false
+ 					}
+ 				}
+ 			}
+ 		}
+ 	}
+ }
+ 
+ function Verifica_Hora(hora, obrigatorio){
+ //Se o parâmetro obrigatório for igual à zero, significa que elepode estar vazio, caso contrário, não
+ 	var hora = document.getElementById(hora);
+ 	if((obrigatorio == 1) || (obrigatorio == 0 && hora.value != "")){
+ 		if(hora.value.length < 5){
+ 			alert("Formato da hora inválido. Por favor, informe a hora no formato correto: hh:mm");
+ 			hora.focus();
+ 			return false
+ 		}
+ 		if(hora.value.substr(0,2) > 23 || isNaN(hora.value.substr(0,2))){
+ 			alert("Formato da hora inválido.");
+ 			hora.focus();
+ 			return false
+ 		}
+ 		if(hora.value.substr(3,2) > 59 || isNaN(hora.value.substr(3,2))){
+
+ 			alert("Formato do minuto inválido.");
+ 			hora.focus();
+ 			return false
+ 		}
+ 	}
+ }
+ 
+ function validaEmail(id)
+ {
+ 		//conselheiro
+		if (id == 0)
+		{
+			if (!Validar_Email(id)) {
+				var email = document.frmFicha.txtEmailCons;
+				email.focus();
+				alert("E-mail inválido!");
+				email.style.borderColor = "red";
+				return;
+			}
+			else
+			{
+				var email = document.frmFicha.txtEmailCons.value;
+				document.frmFicha.txtEmailCons.style.borderColor = "#6B9ED6";
+				valida_dados(email,3,0);
+			}
+		}
+		else
+		{
+			//integrantes
+			if (!Validar_Email(id)) {
+				var email = document.getElementById("txtEmailInt_" + (id));
+				email.focus();
+				email.style.borderColor = "red";
+				alert("E-mail inválido!");
+				return;
+			}
+			else
+			{
+
+				var emailC = document.frmFicha.txtEmailCons.value;
+				var email = document.getElementById("txtEmailInt_" + (id));
+				email.style.borderColor = "#6B9ED6";
+				var emailanterior = document.getElementById("txtEmailInt_" + (id-1));
+				if(id > 0)
+				{
+					email = email.value;
+					valida_dados(email,3,id);
+				}
+			}
+		}
+
+}
+
+
+
+
+
+
+
+function Validar_Email(id)
+{
+
+	
+	if (id == 0)
+		{
+			var email = document.frmFicha.txtEmailCons.value;
+		}
+		else
+		{
+			var email = document.getElementById("txtEmailInt_" + (id));
+			email = email.value;
+		}
+	if (email.length == 0)
+	{
+		return true;
+	}
+	else
+	{
+	if(email.length < 6) {
+		return false;
+	}
+	var x = 0;
+	for (var c=0;c<email.length;c++) {
+		if (email.substring(c,c+1) == '@') {
+			x = c;
+		}
+	}
+	var y = 0;
+	if (x > 0) {
+		for (c=x;c<email.length;c++) {
+			if (email.substring(c,c+1)=='.') {
+				y = c;
+				var valida = 1;
+			}
+		}
+		if (y > 0) {
+			var dominio = '';
+			for (c=x;c<y;c++) {
+				dominio = dominio + email.substring(1,c);
+			}
+		}
+	}
+	else {
+		return false;
+	}					
+	if (y <= x+2){
+		return false;
+	}				
+	if (valida == 1){
+		return true;
+	}
+	}
+}
+ function Verifica_Email(email, obrigatorio){
+ //Se o parâmetro obrigatório for igual à zero, significa que elepode estar vazio, caso contrário, não
+ 	var email = document.getElementById(email);
+ 	if((obrigatorio == 1) || (obrigatorio == 0 && email.value != "")){
+ 		if(!email.value.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi)){
+ 			alert("Informe um e-mail válido");
+ 			email.focus();
+ 			return false
+ 		}
+ 	}
+ }
+ 
+ function Verifica_Tamanho(campo, tamanho){
+ //usado para campos textarea onde não se tem o atributo maxlenght
+ 	var campo = document.getElementById(campo);
+ 	if(campo.value.length > tamanho){
+ 		alert("O campo suporta no máximo " + tamanho + " caracteres.");
+ 		campo.focus();
+ 		return false
+ 	}
+ }
+
+ function ContaCaracteres(campo){
+ //usado para campos textarea onde não se tem o atributo maxlenght
+ 	var campo = document.getElementById(campo);
+	var area = document.all("skin_tam_resposta2");
+    area.innerHTML = "Digitado(s): <b>" + campo.value.length + "</b>";
+  }
+ 
+ 
+ 
+ function Verifica_Cep(cep, obrigatorio){
+ //Se o parâmetro obrigatório for igual à zero, significa que elepode estar vazio, caso contrário, não
+ 	var cep    = document.getElementById(cep);
+ 	var strcep = cep.value;
+ 	if((obrigatorio == 1) || (obrigatorio == 0 && strcep != "")){
+ 		if (strcep.length != 9){
+ 			alert("CEP informado inválido. Formato válido: 99999-999");
+ 			cep.focus();
+ 			return false
+ 		}else{
+ 			if (strcep.indexOf("-") != 5){
+ 				alert("Formato de CEP informado inválido. Formato válido: 99999-999");
+ 				cep.focus();
+ 				return false
+ 			}else{
+ 				if (isNaN(strcep.replace("-","0"))){
+ 					alert("CEP informado inválido.");
+ 					cep.focus();
+ 					return false
+ 				}
+ 			}
+ 		}
+ 	}	  
+ }
+ 
+ function Bloqueia_Caracteres(evnt){
+ //Função permite digitação de números
+ 	if (clientNavigator == "IE"){
+ 		if (evnt.keyCode < 48 || evnt.keyCode > 57){
+ 			return false
+ 		}
+ 	}else{
+ 		if ((evnt.charCode < 48 || evnt.charCode > 57) && evnt.keyCode == 0){
+ 			return false
+ 		}
+ 	}
+ }
+ 
+ function Ajusta_Data(input, evnt){
+ //Ajusta máscara de Data e só permite digitação de números
+ 	if (input.value.length == 2 || input.value.length == 5){
+ 	//	if(clientNavigator == "IE"){
+ 		//	input.value += "/";
+ 		//}else{
+ 			//if(evnt.keyCode == 0){
+ 				input.value += "/";
+ 			//}
+ 		//}
+ 	}
+ //Chama a função Bloqueia_Caracteres para só permitir a digitação de números
+ 	return Bloqueia_Caracteres(evnt);
+ }
+ 
+ function Ajusta_Hora(input, evnt){
+ //Ajusta máscara de Hora e só permite digitação de números
+ 	if (input.value.length == 2){
+ 	//	if(clientNavigator == "IE"){
+ 	//		input.value += ":";
+ 	//	}else{
+ 			//if(evnt.keyCode == 0){
+ 				input.value += ":";
+ 			//}
+ 	//	}
+ 	}
+ //Chama a função Bloqueia_Caracteres para só permitir a digitação de números
+ 	return Bloqueia_Caracteres(evnt);
+ }
+ 
+ function Ajusta_Cep(input, evnt){
+ //Ajusta máscara de CEP e só permite digitação de números
+// 	if (input.value.length == 2){
+// 		if(clientNavigator == "IE"){
+// 			input.value += "."; }
+//	}		
+ 	if (input.value.length == 5){
+ 	//	if(clientNavigator == "IE"){
+ 	//		input.value += "-";
+ 	//	}else{
+ 		//	if(evnt.keyCode == 0){
+ 				input.value += "-";
+ 		//	}
+ 	//	}
+ 	}
+ //Chama a função Bloqueia_Caracteres para só permitir a digitação de números
+ 	return Bloqueia_Caracteres(evnt);
+ }
+
+
+ function Ajusta_Telefone(input, evnt){
+ //Ajusta máscara de CEP e só permite digitação de números
+ 	if (input.value.length == 1){
+ 	//	if(clientNavigator == "IE"){
+ 			input.value = "(" + input.value; //}
+	}		
+ 	if (input.value.length == 3){
+ 		//if(clientNavigator == "IE"){
+ 			input.value += ")"; //}
+	}		
+ 	if (input.value.length == 8){
+ 		//if(clientNavigator == "IE"){
+ 		//	input.value += "-";
+ 		//}else{
+ 			//if(evnt.keyCode == 0){
+ 				input.value += "-";
+ 			//}
+ 		//}
+ 	}
+ //Chama a função Bloqueia_Caracteres para só permitir a digitação de números
+ 	return Bloqueia_Caracteres(evnt);
+ }
+
+
+ 
+ function Atualiza_Opener(){
+ //Atualiza a página opener da popup que chamar a função
+ 	window.opener.location.reload();
+ }
+
+function limpar_form_professor(){
+	document.frmFichaProf.txtIntegrante_1.value = "";
+	document.frmFichaProf.txtEnderecoCap.value ="";
+	document.frmFichaProf.txtBairroCap.value ="";
+	document.frmFichaProf.txtCidadeCap.value ="";
+	document.frmFichaProf.txtUFCap.value ="";
+	document.frmFichaProf.txtEmail_1.value ="";
+	document.frmFichaProf.txtRGCap.value ="";
+	document.frmFichaProf.txtDataNasc_1.value ="";		
+	document.frmFichaProf.cmbSexo_1.value ="";		
+	document.frmFichaProf.txtTelefone_1.value =""; 
+
+    document.frmFichaProf.action = 'dna_ficha_professor.asp';
+    document.frmFichaProf.submit(); 
+} 
+
+function limpar_form_boleto_ies(){
+	document.frmFichaProf.txtEnderecoEscola.value = "";
+	document.frmFichaProf.txtBairroEscola.value ="";
+	document.frmFichaProf.cmbCidade.value ="";
+	document.frmFichaProf.cmbEscola.value ="";
+	document.frmFichaProf.txtCNPJ.value ="";
+	document.frmFichaProf.cmbUF.value ="";
+	document.frmFichaProf.txtCEPEscola.value ="";
+	document.frmFichaProf.txtVencimento.value ="";
+	document.frmFichaProf.txtValor.value ="";		
+
+    document.frmFichaProf.action = 'dna_dados_ies_boleto.asp';
+    document.frmFichaProf.submit(); 
+} 
+
+
+
+function limpa_form_equipe(){
+	document.frmFicha.txtCodEscola.value = "";
+	
+	document.frmFicha.txtGrupo.value = "";
+	document.frmFicha.txtLogin.value = "";
+	document.frmFicha.txtSenha.value = "";
+	document.frmFicha.txtConfSenha.value = "";
+	document.frmFicha.cmbAno.value = "0";
+	
+	document.frmFicha.txtIntegrante_1.value = "";
+	document.frmFicha.txtEnderecoCap.value ="";
+    document.frmFicha.txtBairroCap.value ="";
+	document.frmFicha.txtCidadeCap.value ="";
+	document.frmFicha.txtUFCap.value ="";
+	document.frmFicha.txtEmail_1.value ="";
+	document.frmFicha.txtRGCap.value ="";
+	document.frmFicha.txtDataNasc_1.value ="";
+	document.frmFicha.cmbSexo_1.value ="";
+	document.frmFicha.txtTelefone_1.value ="";
+
+    for (var x=1; x<4; x++){
+	  var nome = document.getElementById("txtIntegrante_" + (x+1));
+	  var apelido = document.getElementById("txtApelido_" + (x+1));
+	  var telefone = document.getElementById("txtTelefone_" + (x+1));
+	  var data_nasc = document.getElementById("txtDataNasc_" + (x+1));
+	  var email = document.getElementById("txtEmail_" + (x+1));
+	  var sexo = document.getElementById("cmbSexo_" + (x+1));
+	  var orkut = document.getElementById("txtOrkut_" + (x+1));
+	  var msn = document.getElementById("txtMSN_" + (x+1));
+	  var fotolog = document.getElementById("txtFotolog_" + (x+1));
+
+
+	  nome.value = "";
+	  apelido.value = "";
+	  telefone.value = "";
+	  data_nasc.value = "";
+	  email.value = "";
+	  sexo.value = "";
+	  orkut.value = "";
+	  msn.value = "";
+	  fotolog.value = "";
+	}
+
+      document.frmFicha.action = 'dna_ficha.asp';
+      document.frmFicha.submit(); 
+}
+
+function valida_form_multi(){
+	
+	if (document.frmFicha.txtCodEscola.value == ""){
+		alert("Informe o código da escola");
+		frmFicha.txtCodEscola.focus();
+		document.frmFicha.txtCodEscola.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtCodEscola.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.txtLogin.value == ""){
+		alert("O campo Login é obrigatório");
+		frmFicha.txtLogin.focus();
+		document.frmFicha.txtLogin.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtLogin.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtSenha.value == ""){
+		alert("O campo Senha é obrigatório");
+		frmFicha.txtSenha.focus();
+		document.frmFicha.txtSenha.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtSenha.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtConfSenha.value == ""){
+		alert("O campo Confirmar Senha é obrigatório");
+		frmFicha.txtConfSenha.focus();
+		document.frmFicha.txtConfSenha.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtConfSenha.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtSenha.value != document.frmFicha.txtConfSenha.value){
+		alert("A confirmação da senha não confere.");
+		frmFicha.txtConfSenha.focus();
+		document.frmFicha.txtConfSenha.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtConfSenha.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.txtNomeCons.value == "")
+	{
+		alert("Informe o nome");
+		frmFicha.txtNomeCons.focus();
+		document.frmFicha.txtNomeCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtNomeCons.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.txtSobreNomeCons.value ==""){
+	  alert("Informe o Sobrenome");
+	  frmFicha.txtSobreNomeCons.focus();
+		document.frmFicha.txtSobreNomeCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtSobreNomeCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtLogradouroCons.value ==""){
+	  alert("Informe o endereço");
+	  frmFicha.txtLogradouroCons.focus();
+		document.frmFicha.txtLogradouroCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtLogradouroCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtBairroCons.value ==""){
+	  alert("Informe o bairro");
+	  frmFicha.txtBairroCons.focus();
+		document.frmFicha.txtBairroCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtBairroCons.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.cmbUFCons.value ==""){
+	  alert("Informe a UF");
+	  frmFicha.cmbUFCons.focus();
+		document.frmFicha.cmbUFCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.cmbUFCons.style.borderColor = "#6B9ED6";
+	}
+
+
+   if (document.frmFicha.municipio.value ==""){
+	  alert("Informe o município");
+	  frmFicha.municipio.focus();
+		document.frmFicha.municipio.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.municipio.style.borderColor = "#6B9ED6";
+	}
+	
+
+	if (document.frmFicha.txtCEPCons.value ==""){
+	  alert("Informe o cep");
+	  frmFicha.txtCEPCons.focus();
+		document.frmFicha.txtCEPCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtCEPCons.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.cmbSexoCons.value =='selected'){
+	  alert("Informe o sexo");
+	  frmFicha.cmbSexoCons.focus();
+		document.frmFicha.cmbSexoCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.cmbSexoCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtEmailCons.value ==""){
+	  alert("Informe o e-mail");
+	  frmFicha.txtEmailCons.focus();
+		document.frmFicha.txtEmailCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtEmailCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtRGCons.value ==""){
+	  alert("Informe o RG");
+	  frmFicha.txtRGCons.focus();
+		document.frmFicha.txtRGCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtRGCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtDataNascCons.value ==""){
+	  alert("Informe a data de nascimento");
+	  frmFicha.txtDataNascCons.focus();
+		document.frmFicha.txtDataNascCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtDataNascCons.style.borderColor = "#6B9ED6";
+	}
+return true;
+
+}
+ 
+
+
+function valida_form(){
+	   var ordem = new Array();
+	   ordem[0] = "PRIMEIRO";
+	   ordem[1] = "SEGUNDO";
+	   ordem[2] = "TERCEIRO";
+	   ordem[3] = "QUARTO";
+	   ordem[4] = "QUINTO";
+
+	if (document.frmFicha.txtCodEscola.value == ""){
+		alert("Informe o código da escola");
+		frmFicha.txtCodEscola.focus();
+		document.frmFicha.txtCodEscola.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtCodEscola.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.txtGrupo.value == ""){
+		alert("Nome do grupo é obrigatório");
+		frmFicha.txtGrupo.focus();
+		document.frmFicha.txtGrupo.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtGrupo.style.borderColor = "#6B9ED6";
+	}
+
+
+	if (document.frmFicha.txtLogin.value == ""){
+		alert("O campo Login é obrigatório");
+		frmFicha.txtLogin.focus();
+		document.frmFicha.txtLogin.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtLogin.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtSenha.value == ""){
+		alert("O campo Senha é obrigatório");
+		frmFicha.txtSenha.focus();
+		document.frmFicha.txtSenha.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtSenha.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtConfSenha.value == ""){
+		alert("O campo Confirmar Senha é obrigatório");
+		frmFicha.txtConfSenha.focus();
+		document.frmFicha.txtConfSenha.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtConfSenha.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtSenha.value != document.frmFicha.txtConfSenha.value){
+		alert("A confirmação da senha não confere.");
+		frmFicha.txtConfSenha.focus();
+		document.frmFicha.txtConfSenha.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtConfSenha.style.borderColor = "#6B9ED6";
+	}
+
+// Conselheiro
+// Professor
+
+		if(document.frmFicha.id_prof.value == 0)
+		{
+		 // if (document.frmFicha.txtNomeCons.value != "") {
+				if ((document.frmFicha.txtSobreNomeCons.value == "") || (document.frmFicha.txtLogradouroCons.value == "") || (document.frmFicha.txtBairroCons.value == "") ||	(document.frmFicha.txtMunicipioCons.value == "") || (document.frmFicha.cmbUFCons.value == "") || (document.frmFicha.txtCEPCons.value == "") || (document.frmFicha.cmbSexoCons.value == "") ||(document.frmFicha.txtEmailCons.value == "") ||(document.frmFicha.txtRGCons.value == "")||(document.frmFicha.txtDataNascCons.value == "")) 
+				{
+					alert("Atenção, todos os dados do professor são obrigatórios!");	
+					return false;
+				}
+		  //}
+		}
+
+	/*if (document.frmFicha.txtNomeCons.value == "")
+	{
+		alert("Informe o nome do Conselheiro");
+		frmFicha.txtNomeCons.focus();
+		document.frmFicha.txtNomeCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtNomeCons.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.txtSobreNomeCons.value ==""){
+	  alert("Informe o Sobrenome do Conselheiro");
+	  frmFicha.txtSobreNomeCons.focus();
+		document.frmFicha.txtSobreNomeCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtSobreNomeCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtLogradouroCons.value ==""){
+	  alert("Informe o endereço do Conselheiro");
+	  frmFicha.txtLogradouroCons.focus();
+		document.frmFicha.txtLogradouroCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtLogradouroCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtBairroCons.value ==""){
+	  alert("Informe o bairro do Conselheiro");
+	  frmFicha.txtBairroCons.focus();
+		document.frmFicha.txtBairroCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtBairroCons.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.txtMunicipioCons.value ==""){
+	  alert("Informe o município do Conselheiro");
+	  frmFicha.txtMunicipioCons.focus();
+		document.frmFicha.txtMunicipioCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtMunicipioCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.cmbUFCons.value ==""){
+	  alert("Informe a UF do Conselheiro");
+	  frmFicha.cmbUFCons.focus();
+		document.frmFicha.cmbUFCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.cmbUFCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtCEPCons.value ==""){
+	  alert("Informe o cep do Conselheiro");
+	  frmFicha.txtCEPCons.focus();
+		document.frmFicha.txtCEPCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtCEPCons.style.borderColor = "#6B9ED6";
+	}
+
+	if (document.frmFicha.cmbSexoCons.value =='selected'){
+	  alert("Informe o sexo do Conselheiro");
+	  frmFicha.cmbSexoCons.focus();
+		document.frmFicha.cmbSexoCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.cmbSexoCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtEmailCons.value ==""){
+	  alert("Informe o e-mail do Conselheiro");
+	  frmFicha.txtEmailCons.focus();
+		document.frmFicha.txtEmailCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtEmailCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtRGCons.value ==""){
+	  alert("Informe o RG do Conselheiro");
+	  frmFicha.txtRGCons.focus();
+		document.frmFicha.txtRGCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtRGCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtDataNascCons.value ==""){
+	  alert("Informe a data de nascimento do Conselheiro");
+	  frmFicha.txtDataNascCons.focus();
+		document.frmFicha.txtDataNascCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtDataNascCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtTelefoneCons.value ==""){
+	  alert("Informe o telefone do Conselheiro");
+	  frmFicha.txtTelefoneCons.focus();
+		document.frmFicha.txtTelefoneCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtTelefoneCons.style.borderColor = "#6B9ED6";
+	}
+	
+	if (document.frmFicha.txtCelularCons.value ==""){
+	  alert("Informe o celular do Conselheiro");
+	  frmFicha.txtCelularCons.focus();
+		document.frmFicha.txtCelularCons.style.borderColor = "red";
+		return false;
+	}
+	else
+	{
+		document.frmFicha.txtCelularCons.style.borderColor = "#6B9ED6";
+	}
+ */   
+// Integrantes do grupo	
+	
+	for (var x=0; x<3; x++){
+
+	  var nome = document.getElementById("txtNomeInt_" + (x+1));
+	  var sobrenome = document.getElementById("txtSobreNomeInt_" + (x+1));
+	  var email = document.getElementById("txtEmailInt_" + (x+1));
+	  var rg = document.getElementById("txtRGInt_" + (x+1));
+	  var data_nasc = document.getElementById("txtDataNascInt_" + (x+1));
+	  var sexo = document.getElementById("cmbSexoInt_" + (x+1));
+      var ano = document.getElementById("cmbAnoInt_" + (x+1));
+	  var orkut = document.getElementById("txtOrkutInt_" + (x+1));
+	  var msn = document.getElementById("txtMSNInt_" + (x+1));
+	  var skype = document.getElementById("txtSkypeInt_" + (x+1));
+	  var lider = document.getElementById("idLider" + (x+1));
+
+	if (x == 0) 
+	{
+		if (nome.value =="")
+		{
+		  alert("Informe o nome do primeiro Integrante" );
+		  nome.focus();
+		  nome.style.borderColor = "red";
+		  return false;
+		}
+		else
+		{
+			nome.style.borderColor = "#6B9ED6";
+		}
+	
+		if (sobrenome.value =="")
+		{
+		  alert("Informe o Sobrenome do primeiro Integrante" );
+		  sobrenome.focus();
+		  sobrenome.style.borderColor = "red";
+		  return false;
+		}
+		else
+		{
+			sobrenome.style.borderColor = "#6B9ED6";
+		}
+		
+		if (email.value =="")
+		{
+		  alert("Informe o e-mail do primeiro Integrante" );
+		  email.focus();
+		  email.style.borderColor = "red";
+		  return false;
+		}
+		else
+		{
+			email.style.borderColor = "#6B9ED6";
+		}
+		
+		if (rg.value =="")
+		{
+		  alert("Informe o RG do primeiro Integrante" );
+		  rg.focus();
+		  rg.style.borderColor = "red";
+		  return false;
+		}
+		else
+		{
+			rg.style.borderColor = "#6B9ED6";
+		}
+		
+		if (data_nasc.value =="")
+		{
+		  alert("Informe a data de nascimento do primeiro Integrante" );
+		  data_nasc.focus();
+		  data_nasc.style.borderColor = "red";
+		  return false;
+		}
+		else
+		{
+			data_nasc.style.borderColor = "#6B9ED6";
+		}
+		
+		if (sexo.value =="")
+		{
+		  alert("Informe o sexo do primeiro Integrante" );
+		  sexo.focus();
+		  sexo.style.borderColor = "red";
+		  return false;
+		}
+		else
+		{
+			sexo.style.borderColor = "#6B9ED6";
+		}
+		
+		if (ano.value =="")
+		{
+		  alert("Informe o ano do primeiro Integrante" );
+		  ano.focus();
+		  ano.style.borderColor = "red";
+		  return false;
+		}
+		else
+		{
+			ano.style.borderColor = "#6B9ED6";
+		}
+	 }
+	 else
+	 {
+		  if (nome.value == "") {
+				if ((sobrenome.value != "") || (rg.value != "") || (data_nasc.value != "") ||
+					(email.value != "") || (sexo.value != "") || (orkut.value != "") || (msn.value != "") ||(ano.value != "") ||
+					(skype.value != "")||(lider.checked == true)) {
+					alert("Informe o nome do "+ordem[x]+" integrante. Caso não deseje cadastrá-lo, deixe todos os seus dados em branco." );
+					nome.focus();
+					nome.style.borderColor = "red";
+					return false;
+				}
+				else
+				{
+					nome.style.borderColor = "#6B9ED6";
+					if ((nome.value == "")||(sobrenome.value == "") || (rg.value == "") || (data_nasc.value == "") ||
+					(email.value == "") || (sexo.value == "") || (orkut.value == "") || (msn.value == "") ||(ano.value == "") ||
+					(skype.value == "")||(lider.checked == false)) {
+						
+						registro = x+1 ;
+						
+						integrantes = document.frmFicha.txtqtdIntegrantes.value;
+	
+						if (registro < integrantes)
+						{
+							alert('Os dados do '+registro+'º integrante nao foram preenchidos corretamente!favor cadastrar! existem '+ integrantes +' integrantes cadastrados!');
+							return false;	
+						}
+						
+					}
+				}
+		  }
+		  	  else
+			  {
+					if (sobrenome.value =="")
+					{
+					  alert("Informe o Sobrenome do "+ordem[x]+" Integrante" );
+					  sobrenome.focus();
+					  sobrenome.style.borderColor = "red";
+					  return false;
+					}
+					else
+					{
+						sobrenome.style.borderColor = "#6B9ED6";
+					}
+					
+					if (email.value =="")
+					{
+					  alert("Informe o e-mail do "+ordem[x]+" Integrante" );
+					  email.focus();
+					  email.style.borderColor = "red";
+					  return false;
+					}
+					else
+					{
+						email.style.borderColor = "#6B9ED6";
+					}
+					
+					if (rg.value =="")
+					{
+					  alert("Informe o RG do "+ordem[x]+" Integrante" );
+					  rg.focus();
+					  rg.style.borderColor = "red";
+					  return false;
+					}
+					else
+					{
+						rg.style.borderColor = "#6B9ED6";
+					}
+					
+					if (data_nasc.value =="")
+					{
+					  alert("Informe a data de nascimento do "+ordem[x]+" Integrante" );
+					  data_nasc.focus();
+					  data_nasc.style.borderColor = "red";
+					  return false;
+					}
+					else
+					{
+						data_nasc.style.borderColor = "#6B9ED6";
+					}
+					
+					if (sexo.value =="")
+					{
+					  alert("Informe o sexo do "+ordem[x]+" Integrante" );
+					  sexo.focus();
+					  sexo.style.borderColor = "red";
+					  return false;
+					}
+					else
+					{
+						sexo.style.borderColor = "#6B9ED6";
+					}
+					
+					if (ano.value =="")
+					{
+					  alert("Informe o ano do "+ordem[x]+" Integrante" );
+					  ano.focus();
+					  ano.style.borderColor = "red";
+					  return false;
+					}
+					else
+					{
+						ano.style.borderColor = "#6B9ED6";
+					}
+			}
+		}
+	}
+return true;
+}
+
+
+function verificaqtdIntegrantes()
+{
+	var txtqtdIntegrantes = 0;
+	var qtdTotal = 0;
+	for (var x=0; x<3; x++){
+	 
+	  var nome = document.getElementById("txtNomeInt_" + (x+1));
+	  if(nome.value!="")
+	  {
+		txtqtdIntegrantes = txtqtdIntegrantes + 1 ;
+		qtdTotal = x+1; 
+ 	  }
+	}	
+	   
+	   	document.frmFicha.txtqtdIntegrantes.value = qtdTotal ;	
+
+}
+
+function busca_dados_ies(){
+      document.frmFichaProf.action = 'dna_dados_ies_boleto.asp';
+	  document.frmFichaProf.target = '';
+      document.frmFichaProf.submit(); 
+}
+
+
+function valida_form_boleto_ies(){
+
+	if (document.frmFichaProf.Vencimento.value == ""){
+		alert("Digite a data de vencimento do boleto");
+		frmFichaProf.Vencimento.focus();
+		return false;
+	} 
+
+	if (document.frmFichaProf.Valor.value == ""){
+		alert("Digite o valor do boleto.");
+		frmFichaProf.Valor.focus();
+		return false;
+	} 
+      document.frmFichaProf.action = 'boleto_bradesco.asp';
+	  document.frmFichaProf.target = '_blank';
+      document.frmFichaProf.submit(); 
+}
+
+
+function valida_form_prof(){
+
+	if (document.frmFichaProf.cmbEscola.value == ""){
+		alert("Os dados da escola são obrigatórios. Digite o código da escola e clique em OK, ou pesquise sua escola;");
+		frmFichaProf.txtCodEscola.focus();
+		return false;
+	} 
+
+
+	if (document.frmFichaProf.txtIntegrante_1.value == "")
+	{
+		alert("Informe o nome do professor");
+		frmFichaProf.txtIntegrante_1.focus();
+		return false;
+	} 
+	
+	if (document.frmFichaProf.txtIntegrante_1.value != ""){
+		if (document.frmFichaProf.txtEnderecoCap.value ==""){
+  		  alert("Informe o endereço do professor");
+		  frmFichaProf.txtEnderecoCap.focus();
+		  return false;
+		}
+
+		if (document.frmFichaProf.txtBairroCap.value ==""){
+  		  alert("Informe o bairro do professor");
+		  frmFichaProf.txtBairroCap.focus();
+		  return false;
+		}
+
+		if (document.frmFichaProf.txtCidadeCap.value ==""){
+  		  alert("Informe a cidade do professor");
+		  frmFichaProf.txtCidadeCap.focus();
+		  return false;
+		}
+
+		if (document.frmFichaProf.txtUFCap.value ==""){
+  		  alert("Informe a UF do professor");
+		  frmFichaProf.txtUFCap.focus();
+		  return false;
+		}
+
+		if (document.frmFichaProf.txtEmail_1.value ==""){
+  		  alert("Digite o email do professor");
+		  frmFichaProf.txtEmail_1.focus();
+		  return false;
+		}
+
+		if (document.frmFichaProf.txtRGCap.value ==""){
+  		  alert("Informe o RG do professor");
+		  frmFichaProf.txtRGCap.focus();
+		  return false;
+		}
+
+		if (document.frmFichaProf.txtDataNasc_1.value ==""){
+  		  alert("Digite a Data de Nascimento do professor");
+		  frmFichaProf.txtDataNasc_1.focus();
+		  return false;
+		}
+		
+		if (document.frmFichaProf.cmbSexo_1.value ==""){
+  		  alert("Selecione o sexo do professor");
+		  frmFichaProf.cmbSexo_1.focus();
+		  return false;
+		}
+		
+		if (document.frmFichaProf.txtTelefone_1.value ==""){
+  		  alert("Informe o telefone fixo do professor");
+		  frmFichaProf.txtTelefone_1.focus();
+		  return false;
+		}
+	} 
+
+      document.frmFichaProf.action = 'dna_confirma_cadastro_prof.asp';
+      document.frmFichaProf.submit(); 
+}
+
+function Limpar() {
+	document.form.nome.value = "";
+	document.form.email.value = "";
+	document.form.municipio.value = "";
+	document.form.estado.value = "";
+	document.form.telefone.value = "";
+	document.form.nome_equipe.value = "";
+	document.form.mensagem.value = "";
+}
+
+function Limpar_imprensa() {
+	document.form.nome.value = "";
+	document.form.email.value = "";
+	document.form.cidade.value = "";
+	document.form.estado.value = "";
+	document.form.telefone.value = "";
+	document.form.celular.value = "";
+	document.form.veiculo.value = "";
+	document.form.cargo.value = "";
+	document.form.pais.value = "";
+	document.form.midia.value = "0";
+}
+
+
+function Formata_Telefone(objeto,tammax,teclapres)
+{
+	var tecla = teclapres.keyCode;
+	vr = objeto.value;
+	vr = vr.replace( "(", "" );
+	vr = vr.replace( ")", "" );
+	vr = vr.replace( " ", "" );
+	vr = vr.replace( "-", "" );
+	tam = vr.length;
+	if (tam < tammax && tecla != 8) {
+		tam = vr.length + 1 ;
+	}
+	if (tecla == 8 ) {
+		tam = tam - 1 ;
+	}
+	if ( tecla == 8 || tecla >= 48 && tecla <= 57 || tecla >= 96 && tecla <= 105 ) {
+		if ( tam <= 4 ) { 
+	 		objeto.value = vr ;
+		}
+	 	if ( (tam > 4) && (tam <= 8) ) {
+	 		objeto.value = vr.substr(0,tam-4) + '-' + vr.substr( tam - 4, tam ) ;
+		}
+	 	if ( (tam >= 9) && (tam <= 10) ) {
+			objeto.value = '(' + vr.substr(0,2) + ') ' + vr.substr(2,tam-6) + '-' + vr.substr(tam-4,tam) ;			
+		}
+	}		
+}
+
+function Validar()
+{
+	if (document.form.nome.value=="") {
+		document.form.nome.focus();
+		alert("O nome é um campo obrigatório!");
+		return;
+	}
+	if (document.form.email.value=="") {
+		document.form.email.focus();
+		alert("O e-mail é um campo obrigatório!");
+		return;
+	}
+	else {
+		if (!Validar_Email_contato(document.form.email.value)) {
+			document.form.email.focus();
+			alert("E-mail inválido!");
+			return;
+		}
+	}
+	if (document.form.estado.value.length == 0) {
+		document.form.estado.focus();
+		alert("Selecione o estado!");
+		return;
+	}
+	if (document.form.municipio.value=="") {
+		document.form.municipio.focus();
+		alert("A cidade é um campo obrigatório!");
+		return;
+	}
+	if (document.form.telefone.value=="") {
+		document.form.telefone.focus();
+		alert("O telefone é um campo obrigatório!");
+		return;
+	}
+	if (document.form.mensagem.value=="") {
+		document.form.mensagem.focus();
+		alert("A mensagem é um campo obrigatório!");
+		return;
+	}
+	document.form.submit();
+}
+
+
+function Validar_imprensa()
+{
+	if (document.form.nome.value=="") {
+		document.form.nome.focus();
+		alert("O nome é um campo obrigatório!");
+		return;
+	}
+	if (document.form.email.value=="") {
+		document.form.email.focus();
+		alert("O e-mail é um campo obrigatório!");
+		return;
+	}
+	else {
+		if (!Validar_Email_contato(document.form.email.value)) {
+			document.form.email.focus();
+			alert("E-mail inválido!");
+			return;
+		}
+	}
+	if (document.form.estado.value.length == 0) {
+		document.form.estado.focus();
+		alert("Selecione o estado!");
+		return;
+	}
+	if (document.form.cidade.value=="") {
+		document.form.cidade.focus();
+		alert("A cidade é um campo obrigatório!");
+		return;
+	}
+	if (document.form.pais.value=="") {
+		document.form.pais.focus();
+		alert("O país é um campo obrigatório!");
+		return;
+	}
+	if (document.form.veiculo.value=="") {
+		document.form.veiculo.focus();
+		alert("O veículo é um campo obrigatório!");
+		return;
+	}
+	if (document.form.cargo.value=="") {
+		document.form.cargo.focus();
+		alert("O cargo é um campo obrigatório!");
+		return;
+	}
+	if (document.form.midia.value=="0") {
+		document.form.midia.focus();
+		alert("A mídia é um campo obrigatório!");
+		return;
+	}
+	document.form.submit();
+}
+
+
+
+function chama_Validar_Email_contato()
+{
+ if (document.form.email.value != "") {
+     if (!Validar_Email_contato(document.form.email.value))  {
+			document.form.email.focus();
+			alert("E-mail inválido!");
+			return;
+		}
+	}
+}
+
+function Validar_Email_contato(email)
+{
+	if(email.length < 6) {
+		return false;
+	}
+	var x = 0;
+	for (var c=0;c<email.length;c++) {
+		if (email.substring(c,c+1) == '@') {
+			x = c;
+		}
+	}
+	var y = 0;
+	if (x > 0) {
+		for (c=x;c<email.length;c++) {
+			if (email.substring(c,c+1)=='.') {
+				y = c;
+				var valida = 1;
+			}
+		}
+		if (y > 0) {
+			var dominio = '';
+			for (c=x;c<y;c++) {
+				dominio = dominio + email.substring(1,c);
+			}
+		}
+	}
+	else {
+		return false;
+	}					
+	if (y <= x+2){
+		return false;
+	}				
+	if (valida == 1){
+		return true;
+	}
+}
+</script>
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>DNA - Desafio Nacional Acadêmico</title>
+
+ <!-- <link href="css/estilo_ff.css" rel="stylesheet" type="text/css" /> -->
+ <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/estilos.css') }}">
+ <!-- <link href="css/estilo.css" rel="stylesheet" type="text/css"> -->
+
+<script>
+
+function enviar(val,des){
+  /*document.frmJogo.Parametro.value = val;
+ // document.frmJogo.desistir.value = des;
+  document.frmJogo.target = "_self";
+  document.frmJogo.action = "console_desafio_semana.asp";
+  document.frmJogo.submit();*/
+  let host = location.hostname
+  let port = location.port
+  getAnswer(function(resposta) {
+	if(document.frmJogo.txtResposta.value.toLowerCase() == resposta.toLowerCase()) {
+		window.location = `/desafio/${getID()}/correct`
+	} else {
+		window.location = `/desafio/${getID()}/wrong`
+	}
+  })
+  
+  // ENVIAR RESPOSTA
+}
+
+function do_enter(evento){
+  if (evento.keyCode == 13) {
+	event.preventDefault();
+     evento.keyCode = 0;
+	 enviar('4','0');
+  }
+}
+
+function mostra_recados(){
+  document.frmJogo.action = "http://www.dna2007.org/dna_equipe.asp";
+//  document.frmJogo.action = "http://localhost/dna2007/dna_recados.asp";
+  document.frmJogo.target = "_blank";
+  document.frmJogo.submit();
+}
+
+
+    function do_post()
+
+    {
+
+        if( document.frmJogo.nome.value == '' )
+
+        {
+
+            alert( 'Preencha o nome!' );
+
+            document.frmJogo.nome.focus();
+
+            return false;
+
+        }
+
+        if( document.frmJogo.email.value == '' )
+
+        {
+
+            alert( 'Preencha o email!' );
+
+            document.frmJogo.email.focus();
+
+            return false;
+
+        }
+
+        if( document.frmJogo.nome_amigo.value == '' )
+
+        {
+
+            alert( 'Preencha o nome do seu amigo!' );
+
+            document.frmJogo.nome_amigo.focus();
+
+            return false;
+
+        }
+
+        if( document.frmJogo.email_amigo.value == '' )
+
+        {
+
+            alert( 'Preencha o email do seu amigo!' );
+
+            document.frmJogo.email_amigo.focus();
+
+            return false;
+
+        }
+
+        document.frmJogo.Parametro.value = 7;
+
+        document.frmJogo.submit();
+
+    }
+
+
+</script>
+</head>
+<body class="tag_body_game">
+<a href="https://www.instagram.com/desafionacional.oficial/"><img src="../static/images/Insta.jpg" alt="" width="107" height="111"></a><a href="https://www.facebook.com/Desafio-Nacional-Acad%C3%AAmico-105271808356431"><img src="../static/images/face.jpg" alt="" width="107" height="111"></a><br>  
+Ajude o DNA! Siga nossas redes sociais!<br>
+	<!--BODY GAME-->
+ <form name="frmJogo" method="post"> 
+ <input type="hidden" name="Parametro">
+ <input type="hidden" name="atualizar" value="0">
+ <input type="hidden" name="imagem_questao" value="etapas/desafio_diario/tecnologia_09_c_5jkoikg45o4a.jpg">
+ <input type="hidden" name="ext_questao" value=".jpg">
+ <input type="hidden" name="valor_questao" value="1500">
+ <input type="hidden" name="id_questao" value="116">
+ <input type="hidden" name="nome_etapa" value="Etapa: Tecnologia">
+ <input type="hidden" name="tamanho" value="5">
+ <input type="hidden" name="enunciado" value="Que horas o relógio ao lado está marcando?
+<p>
+Formatação da Resposta: 00:00
+<p>
+Dica: Linguagem de programação">
+ <input type="hidden" name="id_desafio" value="3249">
+ <input type="hidden" name="acertadores" value="4">
+ <input type="hidden" name="enviado" value="">
+ 
+ 	<div id="body_game" class="body_game">
+		<!--LUZES-->
+		
+  <div id="luzes_game" class="luzes_game"> </div>
+		<!--FIM LUZES-->
+		
+		<!--MENU SUPERIOR-->
+		
+		  <div id="menu_superior_game" class="menu_superior_game" style="text-align:center;">
+		
+    <div class="arialAzul12" id="etapadesafio"></div> 
+	<script>
+		$.getJSON(`../static/images/desafio${getID()}.json`, function(data) {
+			document.getElementById("etapadesafio").innerText = `Etapa: ${data.etapa}`
+		})
+	</script>
+    <div id="bt_game_e" class="bt_game_e"> <img src="../static/images/bt_game_e.gif" width="33" height="32" border="0"> 
+    </div>
+    <div id="titulo_game" class="titulo_game"> 
+      <div id="texto_titulo_game" class="texto_titulo_game"> <span class="arialAzul14"><b>Desafio 
+        de Hoje</b></span> </div>
+    </div>
+    <div id="bt_game_r" class="bt_game_r"> <img src="../static/images/bt_game_r.gif" width="33" height="32" border="0"> 
+    </div>
+    <div class="arialVerde12" style="height:18px; font-size:12px; color:#006600; float:left; _float:none; width:inherit"><b>4 pessoas resolveram este desafio até agora.</b></div>
+  </div>
+		<!--FIM MENU SUPERIOR-->
+		
+		<!--PAINEL-->
+		
+		<div id="painel_game" class="painel_game">
+		  
+  <div id="corpo_interno_game" class="corpo_interno_game"> 
+    
+         <div id="rolatexto_skin" style="position:relative; top:-17%; left:-24%; _position:inherit;height:170px; _height:170px; width:213px; _width:249px;_float:left;background-color:#CCCC66;"> 
+<!--         <div id="rolatexto_skin" style="position:relative; top:-42%; left:0.5%; _position:inherit;height:170px; _height:170px; width:213px; _width:249px;_float:left;background-color:#CCCC66;"> -->
+      
+<!--    <div id="rolatexto_skin" style="position:relative; top:0%; left:-98%; _position:inherit;height:170px; _height:170px; width:213px; _width:249px;_float:left;background-color:#CCCC66;" > -->
+      <div id="enunciado_questao" class="enunciado_questao" style="width:210px; height:160px"> 
+         
+        <div style="text-align:center"><span class="arialCinza12"><strong><font color="#FF0000">Esse desafio é somente para treino!<br>
+        </font></strong></span></div>
+     <span class="arialCinza12" id="enunciadopergunta"></span></div>
+      <!--enunciado-->
+    </div>
+     <script>
+		$.getJSON(`../static/images/desafio${getID()}.json`, function(data) {
+			enunciado = data.enunciado;
+			if(enunciado.includes("<a href=")) {
+				split = enunciado.split('<a href=\"')
+				part1 = split[0];
+				url = split[1].split("</a>")[0];
+				part2 = split[1].split("</a>")[1];
+				
+				url = url.substr(19);
+				url = `<a href=\"../static/images/extra${getID()}` + url + "</a>"
+				
+				enunciado = part1 + url + part2;
+			}
+			document.getElementById("enunciadopergunta").innerHTML = enunciado
+		})
+	 </script>
+    <div id="imagem_questao" class="imagem_questao" style="background: url(&quot;../static/images/imagem.jpg&quot;) no-repeat;position:relative; left:60%; top:-100%;"> 
+<!--      <img src="etapas/desafio_diario/tecnologia_09_c_5jkoikg45o4a.jpg" width="165" height="166"> -->
+    </div>
+    <!--imagem_questao-->
+    <script>
+		document.getElementById("imagem_questao").style=`background: url('../static/images/desafio${getID()}.jpg') no-repeat;position:relative; left:60%; top:-100%;`
+	</script>
+    <div id="resposta_questao" class="resposta_questao" style="margin-left:2;_margin-left:0;width:413px;_width:415px;position:relative; top:-100%;"> 
+      
+        <div class="arialAzul12" style="float:left; height:27px; padding-top:8px; padding-left:4px; position:relative; top:3px; _top:-35px; _top:0px"><b>Resposta:</b> 
+          <input name="txtResposta" type="text" class="formulario" id="resposta" onkeypress="do_enter(event);" onkeyup="ContaCaracteres('resposta');" size="25" maxlength="5">
+          &nbsp; 
+		  <script>
+			getAnswer(function(resposta) {
+				document.getElementById('resposta').setAttribute('maxlength', resposta.length)
+			})
+		  </script>
+          <input type="button" name="responder" value="Enviar" class="formulario" onclick="enviar('4','0');">
+        </div>
+        <div id="skin_tam_resposta" class="arialAzul12" style="float:left; height:32px; padding-top:1px; padding-left:4px; position:relative; top:3px;_top:-35px; _top:0px"><br>
+		  <script>
+			getAnswer(function(resposta) {
+				document.getElementById("skin_tam_resposta").innerText = `${resposta.length} caracteres`
+				$('<div id="skin_tam_resposta2" class="arialAzul12">Digitado(s): <b>0</b></div>').appendTo('[id=skin_tam_resposta]')
+			});
+		  </script>
+        </div>
+      </div>
+     
+  
+    <!--resposta_questao-->
+      <script>
+		    document.frmJogo.txtResposta.focus()
+		 </script>
+      
+      <!--		   <div id="skin_conclusao_jogo" class="arialAzul18" style="padding-top:30px">
+			 <p>A primeira fase do DNA está concluída!
+		     <p>Aguardem o Enigma Final
+		   </div>-->
+      
+      <!--			   <div id="skin_conclusao_jogo" class="arialAzul18"  style="padding-top:30px">
+				  <P>A primeira fase do DNA está concluída!
+				  <p>Aguardem o Enigma Final
+			   </div>-->
+      
+      <!--		   <div id="skin_conclusao_jogo" class="arialAzul18" style="padding-top:30px">
+			 <p>A primeira fase do DNA está concluída!
+		     <p>Aguardem o Enigma Final
+		   </div> -->
+      
+    </div>
+    <!--corpo_interno_game-->
+  </div>
+  <!--painel_game-->
+		<!--FIM PAINEL-->
+
+
+
+
+		<!--FIM PAINEL-->
+		
+		<!--MENU-->
+		
+			      <div id="menu_game" class="menu_game" style="position:relative;top:23.5%;left:23%;">
+                     <img src="../static/images/menu_game.png" style="position:relative;top:0%;left:0%;" width="187" height="73" border="0" usemap="#Map"> 
+			  
+    <map name="Map" id="Map">
+      <area shape="circle" coords="34,34,28" href="#" onclick="enviar('','0');" alt="Desafio" title="Desafio">
+      <area shape="circle" coords="107,45,22" href="#" onclick="resposta();"  alt="Resposta" title="Resposta"> 
+ 	  <!--<area shape="circle" coords="165,30,17" href="#" onClick="enviar('1','0');" alt="Pistas" title="Pistas" />-->
+    </map>
+  </div>
+		<!--FIM MENU-->
+		
+		<!--BT AJUDA-->
+		
+		    <!--Se uma questão está sendo apresentada => var_parametro="2"-->
+              
+                           <div id="bt_ajuda_game" class="bt_ajuda_game" style="position:relative;  top:-64%;_top:-58%; left:66.7%; _left:19.5%">
+					  
+            <div id="text_status" class="text_status" style="position:relative; top:30%; _top:25%; left:3%; _left:5%">
+        
+       </div>
+  </div>
+		<!--FIM BT AJUDA-->
+		
+		<!--STATUS 01-->
+		
+		    <!--Se uma questão está sendo apresentada => var_parametro="2"-->
+              
+  		                     <div id="status01" class="status01" style="position:relative; top:-64.3%; _top:-58.5%; left:69%; _left:23%">
+					  
+            <div id="text_status" class="text_status" style="position:relative; top:30%; _top:25%; left:3%; _left:5%">
+       
+    <!--<div id="text_status" class="text_status" style="position:relative; top:31%; _top:25%"> <span class="arialAzul12" title="Etapa atual"><b></b></span> 
+    </div>-->
+  </div>
+		<!--FIM STATUS 01-->
+		
+		<!--STATUS 02-->
+		
+		    <!--Se uma questão está sendo apresentada => var_parametro="2"-->
+              
+  		                  <div id="status02" onclick="enviar('3','0');" class="status02" style="cursor:pointer; cursor:hand;position:relative; top:102.8%; _top:-58.5%; left:10%; _left:25%">
+					  
+                <div id="text_status" class="text_status" style="cursor:pointer; cursor:hand;position:relative; top:32%; _top:35%"> <span class="arialAzul12" title="Enviar Desafio a um amigo"><b>Desafiar 
+      Amigo(a)</b></span> </div>
+       
+  </div> 
+		<!--FIM STATUS 02-->
+		
+		<!--STATUS 03-->
+		
+		    <!--Se uma questão está sendo apresentada => var_parametro="2"-->
+              
+                           <div id="status03" class="status03" style="position:relative; top:104%; _top:-58.5%; left:-8%; _left:23%"> 
+					  
+
+<!--      <div id="text_status" class="text_status" > <span class="arialAzul12" title="Desafios pulados nesta etapa"><b></b></span> 
+      </div>-->
+    </div>
+
+    <!--FIM STATUS 03-->
+    <!--ANUNCIO-->
+    <div id="anuncio" class="anuncio"> 
+      <!--<div id="anuncio" class="anuncio" style="margin-top:55px;margin-left:60px">
+        À 00h00 daremos um pequeno descanso às mentes pensantes. Isto não é um recesso. É uma pausa para o café. Retornaremos à 00h20. -->
+    </div>
+    <!--FIM ANUNCIO-->
+  </div>
+	<!--FIM BODY GAME--> 
+    
+
+	
+
+
+
+</div></form></body></html>
