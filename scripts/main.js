@@ -48,19 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function fetchChallenges() {
-        fetch('challenges/challenges.json')
-            .then(response => response.json())
-            .then(data => {
-                challenges = data;
-                handleRouting();
-            })
-            .catch(() => {
-                content.innerHTML = '<h1>Error loading challenges</h1>';
-            });
-    }
-
     window.addEventListener('popstate', handleRouting);
 
-    fetchChallenges();
+    handleRouting();
 });
