@@ -5,7 +5,7 @@
   crossorigin="anonymous"></script>
 	<script> 
 		function getID() {
-			return window.location.pathname.split('/desafio/')[1]
+			return parseInt(localStorage.getItem('currentChallengeIndex'))
 		}
 		function getAnswer(callback) {
 			$.getJSON(`../static/images/desafio${getID()}.json`, function(data) {

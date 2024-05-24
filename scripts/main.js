@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const content = document.getElementById('content');
-    let challenges = [];
-    let currentChallengeIndex = localStorage.getItem('currentChallengeIndex') ? parseInt(localStorage.getItem('currentChallengeIndex')) : 0;
+    let currentChallengeIndex = localStorage.getItem('currentChallengeIndex') ? parseInt(localStorage.getItem('currentChallengeIndex')) : 1;
+    localStorage.setItem('currentChallengeIndex', currentChallengeIndex);
 
     function loadTemplate(template) {
         fetch(`templates/${template}.html`)
@@ -44,16 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleRouting() {
         const path = window.location.pathname.split('/').filter(segment => segment);
         if (path.length === 0) {
-            loadChallenge(challenges[currentChallengeIndex]);
-        } else if (path.length === 1) {
-            const status = path[0];
-            if (status === 'correct' || status === 'wrong') {
-                updateProgress(status);
-            } else {
-                content.innerHTML = '<h1>404 Not Found</h1>';
-            }
-        } else {
-            content.innerHTML = '<h1>404 Not Found</h1>';
+            loadChallenge(currentChallengeIndex);
         }
     }
 
