@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(() => {
-                content.innerHTML = '<h1>404 Not Found</h1>';
+                localStorage.setItem('currentChallengeIndex', 1);
+                content.innerHTML = `<h1>Você completou todos os desafios! Atualize a página para voltar ao desafio #1. Você estava no desafio: ${currentChallengeIndex - 1}</h1>`;
             });
     }
 
@@ -52,6 +53,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const path = window.location.pathname.split('/').filter(segment => segment);
         if (path.length === 0) {
             loadChallenge();
+        }
+    }
+
+    function setChallenge() {
+        const set = prompt("Você gostaria de pular para outro desafio? Se sim, insira o número do desafio abaixo:")
+        try {
+            const ID = parseInt(set);
+            if (1 <= ID) {
+                localStorage.setItem('currentChallengeIndex', ID);
+                loadChallenge()
+            }
+        } catch (e) {
+            return;
         }
     }
 
@@ -67,4 +81,5 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     document.addEventListener('loadChallenge', loadChallenge);
+    document.addEventListener('setChallenge', setChallenge);
 });

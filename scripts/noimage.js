@@ -19,6 +19,10 @@ function enviar(val,des){
         const questionEvent = new Event('loadChallenge');
         document.dispatchEvent(questionEvent);
         return;
+    } else if(val == "setQuestion") {
+        const questionEvent = new Event('setChallenge');
+        document.dispatchEvent(questionEvent);
+        return;
     }
 
     fetch(`${getDirectory()}/DNA.json`)
@@ -59,6 +63,7 @@ fetch(`${getDirectory()}/DNA.json`)
         document.getElementById('resposta').setAttribute('maxlength', answer.length)
         document.getElementById("etapadesafio").innerText = `Etapa: ${data.etapa}`
         document.getElementById("skin_tam_resposta").innerText = `${answer.length} caracteres`
+        document.getElementById("status02").querySelector(".arialAzul12").innerText = `Desafio ${getID()}`
 
         const div = document.createElement('div');
         div.id = 'skin_tam_resposta2';
