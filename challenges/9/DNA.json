@@ -1,6 +1,6 @@
 {
-	"image": "Imagem.jpg",
-	"resposta": "engenharia",
-	"enunciado": "<p>4 - A imagem ao lado representa que profissão?<br><br>Dica da Érika: Construção</p>",
-	"etapa": "Profissões"
+	"image": false,
+	"resposta": "Amor Havaiano",
+	"enunciado": "<p>7 - Jack Johnson nasceu em um local turístico dos Estados Unidos. Nos anos 30, outro cantor, Bing Crosby (o grande rival de Frank Sinatra) estrelou um filme ambientado neste local. Qual o nome do filme?</p>",
+	"etapa": "Música"
 }

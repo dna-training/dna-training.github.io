@@ -1,6 +1,6 @@
 {
-	"image": "Imagem.gif",
-	"resposta": "El Niño",
-	"enunciado": "<p>Como é conhecido o fenômeno que pode ser visto na imagem ao lado?</p>",
-	"etapa": "Meio Ambiente"
+	"image": "Imagem.jpg",
+	"resposta": "fonoaudiólogo",
+	"enunciado": "<p>Que profissional você recomendaria para o personagem ao lado?<br><br>Formatação da resposta: masculino</p>",
+	"etapa": "Profissões"
 }

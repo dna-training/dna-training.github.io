@@ -1,5 +1,10 @@
-Google "Que sistema de informações permite a qualquer indivíduo, por meio da Internet, acesso amplo e facilitado a diversas bases de dados sobre planos e orçamentos públicos federais?"
--> https://www12.senado.leg.br/noticias/materias/2005/06/13/senado-lanca-programa-siga-brasil-para-dar-mais-transparencia-aos-dados-orcamentarios
--> Senado lança programa Siga Brasil...
+Google Images
+-> Site de tutor
+-> https://www.tutorbrasil.com.br/forum/viewtopic.php?t=15058
 
-Resposta: Siga Brasil
+R(1, 1587284715)
+d = 0,1587284715
+
+"tomando uma corda com uma medida de 15,87%..."
+
+Resposta: 15,87

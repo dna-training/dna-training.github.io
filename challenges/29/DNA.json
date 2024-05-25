@@ -1,7 +1,6 @@
 {
-	"image": false,
-	"resposta": "eccca",
-	"enunciado": "<p>10 - Cada imagem retrata um fenômeno ou objeto da natureza. Responda este desafio colocando somente a primeira letra de cada resposta.</p><p></p><p><a href=\"static/images/extra.html\" target=\"_blank\">Clique aqui para ver as imagens.</a></p>",
-	"etapa": "Vestibular",
-	"extra": "extra.html"
+	"image": "Imagem.jpg",
+	"resposta": "Bangladesh",
+	"enunciado": "<p>1 - Que país tem, atualmente, o maior número de homens em tropas de paz da ONU pelo mundo (dados de março de 2006)?<br><br>Dica da Érika: Bandeira</p>",
+	"etapa": "Atualidades"
 }

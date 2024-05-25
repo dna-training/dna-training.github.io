@@ -1,6 +1,6 @@
 /***** BODY *****/
 body {
-	background:#ffffff url("../images/fundo.jpg") 
+	background:#ffffff
 	top left repeat-x fixed;
 	margin: 0 0 0 0;
  	/*Centralizar no IE */

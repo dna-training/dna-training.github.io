@@ -1,28 +1,5 @@
-Google "A estréia profissional da cantora Maria Rita ocorreu no show de um violonista paulista, que sempre conta com participações vocais em seus discos e shows. De quem é a voz na faixa que abre o mais recente disco deste violonista?"
--> ...como cantora foi no show do violonista Chico Pinheiro, em São Paulo, em 2002.
+Google Images
+-> Blue Water Yachts (http://www.bwyachts.com/sailboat%20home.html)
+-> Shop: Spinnaker, Custom
 
-
-
-
-
-URL:
-fetch("https://www.desafionacional.com.br/dna_em/console/console_desafio_semana.asp", {
-  "headers": {
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-    "accept-language": "pt-BR,pt;q=0.8",
-    "cache-control": "max-age=0",
-    "content-type": "application/x-www-form-urlencoded",
-    "sec-fetch-dest": "document",
-    "sec-fetch-mode": "navigate",
-    "sec-fetch-site": "same-origin",
-    "sec-fetch-user": "?1",
-    "sec-gpc": "1",
-    "upgrade-insecure-requests": "1"
-  },
-  "referrer": "https://www.desafionacional.com.br/dna_em/console/console_desafio_semana.asp",
-  "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": "Parametro=4&atualizar=0&imagem_questao=NA&ext_questao=NA&valor_questao=500&id_questao=111&nome_etapa=Etapa%3A+M%FAsica&tamanho=10&enunciado=10+-+A+estr%E9ia+profissional+da+cantora+Maria+Rita+ocorreu+no+show+de+um+violonista+paulista%2C+que+sempre+conta+com+participa%E7%F5es+vocais+em+seus+discos+e+shows.+De+quem+%E9+a+voz+na+faixa+que+abre+o+mais+recente+disco+deste+violonista%3F%0D%0A&id_desafio=3390&acertadores=0&enviado=&txtResposta=ANSWER+HER",
-  "method": "POST",
-  "mode": "cors",
-  "credentials": "include"
-});
+Resposta: Spinnaker

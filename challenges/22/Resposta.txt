@@ -1,5 +1,13 @@
-Google "instrumento usado em uma musica de um jogo famoso da nintendo"
--> https://www.nintendoblast.com.br/2011/05/item-box-ocarina-of-time-zelda.html#:~:text=Ocarina%20%C3%A9%20o%20nome%20de%20um%20instrumento%20musical.
--> Ocarina é o nome de um instrumento musical.
+Google Images
+-> Relógio de Pulso Binário
 
-Resposta: ocarina
+A fileira de cima mostra as horas, e a de baixo mostra os minutos.
+Fileira de cima:
+- 0111
+-> 7
+
+Fileira de baixo:
+- 011011
+-> 27
+
+Resposta: 07:27

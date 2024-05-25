@@ -3,26 +3,6 @@
   src="https://code.jquery.com/jquery-3.6.1.min.js"
   integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
   crossorigin="anonymous"></script>
-	<script> 
-		function getID() {
-			return parseInt(localStorage.getItem('currentChallengeIndex'))
-		}
-		function getAnswer(callback) {
-			$.getJSON(`../static/images/desafio${getID()}.json`, function(data) {
-				callback(data.resposta);
-			})
-		}
-		function getDetailedAnswer(callback) {
-			$.get(`../static/images/resposta${getID()}.txt`, function(data) {
-				callback(data)
-			}, 'text');
-		}
-		function resposta() {
-			getDetailedAnswer(function(txt) {
-				alert(txt);
-			})
-		}
-	</script>
 	<script language="javascript">
 	
 		
@@ -1837,32 +1817,6 @@ function Validar_Email_contato(email)
 
 <script>
 
-function enviar(val,des){
-  /*document.frmJogo.Parametro.value = val;
- // document.frmJogo.desistir.value = des;
-  document.frmJogo.target = "_self";
-  document.frmJogo.action = "console_desafio_semana.asp";
-  document.frmJogo.submit();*/
-  let host = location.hostname
-  let port = location.port
-  getAnswer(function(resposta) {
-	if(document.frmJogo.txtResposta.value.toLowerCase() == resposta.toLowerCase()) {
-		window.location = `/desafio/${getID()}/correct`
-	} else {
-		window.location = `/desafio/${getID()}/wrong`
-	}
-  })
-  
-  // ENVIAR RESPOSTA
-}
-
-function do_enter(evento){
-  if (evento.keyCode == 13) {
-	event.preventDefault();
-     evento.keyCode = 0;
-	 enviar('4','0');
-  }
-}
 
 function mostra_recados(){
   document.frmJogo.action = "http://www.dna2007.org/dna_equipe.asp";
@@ -1966,11 +1920,6 @@ Dica: Linguagem de programação">
 		  <div id="menu_superior_game" class="menu_superior_game" style="text-align:center;">
 		
     <div class="arialAzul12" id="etapadesafio"></div> 
-	<script>
-		$.getJSON(`../static/images/desafio${getID()}.json`, function(data) {
-			document.getElementById("etapadesafio").innerText = `Etapa: ${data.etapa}`
-		})
-	</script>
     <div id="bt_game_e" class="bt_game_e"> <img src="../static/images/bt_game_e.gif" width="33" height="32" border="0"> 
     </div>
     <div id="titulo_game" class="titulo_game"> 
@@ -2000,57 +1949,23 @@ Dica: Linguagem de programação">
      <span class="arialCinza12" id="enunciadopergunta"></span></div>
       <!--enunciado-->
     </div>
-     <script>
-		$.getJSON(`../static/images/desafio${getID()}.json`, function(data) {
-			enunciado = data.enunciado;
-			if(enunciado.includes("<a href=")) {
-				split = enunciado.split('<a href=\"')
-				part1 = split[0];
-				url = split[1].split("</a>")[0];
-				part2 = split[1].split("</a>")[1];
-				
-				url = url.substr(19);
-				url = `<a href=\"../static/images/extra${getID()}` + url + "</a>"
-				
-				enunciado = part1 + url + part2;
-			}
-			document.getElementById("enunciadopergunta").innerHTML = enunciado
-		})
-	 </script>
-    <div id="imagem_questao" class="imagem_questao" style="background: url(&quot;../static/images/imagem.jpg&quot;) no-repeat;position:relative; left:60%; top:-100%;"> 
+    <div id="imagem_questao" class="imagem_questao"> 
 <!--      <img src="etapas/desafio_diario/tecnologia_09_c_5jkoikg45o4a.jpg" width="165" height="166"> -->
     </div>
     <!--imagem_questao-->
-    <script>
-		document.getElementById("imagem_questao").style=`background: url('../static/images/desafio${getID()}.jpg') no-repeat;position:relative; left:60%; top:-100%;`
-	</script>
     <div id="resposta_questao" class="resposta_questao" style="margin-left:2;_margin-left:0;width:413px;_width:415px;position:relative; top:-100%;"> 
       
         <div class="arialAzul12" style="float:left; height:27px; padding-top:8px; padding-left:4px; position:relative; top:3px; _top:-35px; _top:0px"><b>Resposta:</b> 
           <input name="txtResposta" type="text" class="formulario" id="resposta" onkeypress="do_enter(event);" onkeyup="ContaCaracteres('resposta');" size="25" maxlength="5">
           &nbsp; 
-		  <script>
-			getAnswer(function(resposta) {
-				document.getElementById('resposta').setAttribute('maxlength', resposta.length)
-			})
-		  </script>
           <input type="button" name="responder" value="Enviar" class="formulario" onclick="enviar('4','0');">
         </div>
         <div id="skin_tam_resposta" class="arialAzul12" style="float:left; height:32px; padding-top:1px; padding-left:4px; position:relative; top:3px;_top:-35px; _top:0px"><br>
-		  <script>
-			getAnswer(function(resposta) {
-				document.getElementById("skin_tam_resposta").innerText = `${resposta.length} caracteres`
-				$('<div id="skin_tam_resposta2" class="arialAzul12">Digitado(s): <b>0</b></div>').appendTo('[id=skin_tam_resposta]')
-			});
-		  </script>
         </div>
       </div>
      
   
     <!--resposta_questao-->
-      <script>
-		    document.frmJogo.txtResposta.focus()
-		 </script>
       
       <!--		   <div id="skin_conclusao_jogo" class="arialAzul18" style="padding-top:30px">
 			 <p>A primeira fase do DNA está concluída!

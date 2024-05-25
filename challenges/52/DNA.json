@@ -1,6 +1,6 @@
 {
-	"image": "Imagem.jpg",
-	"resposta": "Imperial Ordem da Rosa",
-	"enunciado": "<p>Qual o nome da condecoração ao lado?<br><br>Dica: História do Brasil</p>",
+	"image": false,
+	"resposta": "enxofre",
+	"enunciado": "<p>6 - Qual elemento químico que é encontrado no diesel comum que é praticamente ausente no biodiesel.</p>",
 	"etapa": "Vestibular"
 }

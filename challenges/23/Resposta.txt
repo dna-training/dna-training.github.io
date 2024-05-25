@@ -1,5 +1,5 @@
-Google Images
--> https://pt.wikipedia.org/wiki/Atol_das_Rocas
--> Atol das Rocas
+Google "programação fortran"
+-> [...] primeiro compilador foi desenvolvido para o IBM 704 em 1954-57
 
-Resposta: Atol das Rocas
+Resposta: IBM
+(todos foram criados pela IBM)

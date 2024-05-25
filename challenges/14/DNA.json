@@ -1,6 +1,6 @@
 {
-	"image": "Imagem.jpg",
-	"resposta": "Richard Matthew Stallman",
-	"enunciado": "<p>Um importante defensor do software livre foi retratado na foto ao lado.<br>Quem é ele?</p>",
-	"etapa": "Tecnologia"
+	"image": false,
+	"resposta": "João Paulo II",
+	"enunciado": "<p>8 - A notícia da morte de Bob Marley foi obscurecida por um ato de violência que repercutiu em todo o mundo dois dias depois. Quem foi o alvo desse atentado?</p>",
+	"etapa": "Música"
 }

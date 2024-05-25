@@ -1,6 +1,6 @@
 {
-	"image": false,
-	"resposta": "apêndice",
-	"enunciado": "<p>O que pode ser encontrado tanto em um livro como no corpo humano?</p>",
-	"etapa": "Curiosidades"
+	"image": "Imagem.jpg",
+	"resposta": "meteorologista",
+	"enunciado": "<p>Que profissional fornece as informações para esta apresentadora?</p>",
+	"etapa": "Profissões"
 }

@@ -1,6 +1,6 @@
 {
-	"image": "Imagem.jpg",
-	"resposta": "Linus Torvalds",
-	"enunciado": "8 - A foto ao lado mostra um importante nome ligado ao mundo do software. Quem é ele?<br><br>Dica da Érika: Microsoft",
+	"image": false,
+	"resposta": "ping localhost",
+	"enunciado": "<p>Qual é o comando utilizado para verificar se sua placa de rede está respondendo?</p>",
 	"etapa": "Tecnologia"
 }

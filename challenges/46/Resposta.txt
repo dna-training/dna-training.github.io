@@ -1,4 +1,4 @@
-> Google Image Search
-"Linus Torvalds"
+Minha cabeça
+-> ping localhost
 
-(criador do Linux e Git)
+Resposta: ping localhost

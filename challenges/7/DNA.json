@@ -1,6 +1,7 @@
 {
-	"image": "Imagem.jpg",
-	"resposta": "Parque Nacional do Itatiaia",
-	"enunciado": "<p>Algumas das terras do Sr. Irineu Evangelista de Souza são consideradas de grande importância para o Brasil. Qual o nome dado a essas terras hoje?<br><br>Dica: Alberto Lofgren<br>Dica02: nr. 1713</p>",
-	"etapa": "Meio Ambiente"
+	"image": false,
+	"resposta": "letter butter stamp",
+	"enunciado": "<p>Faça a tradução das palavras no áudio para o inglês.</p><p>Formatação da resposta: utilize um espaço entre cada uma das palavras. Exemplo: Palavra01 Palavra02 Palavra03</p><p>Obs.: <a href=\"______\" target=\"_blank\">Clique aqui para ouvir o áudio.</a></p>",
+	"etapa": "Idiomas",
+	"extra": "Audio.mp3"
 }

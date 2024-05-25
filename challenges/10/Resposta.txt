@@ -1,7 +1,5 @@
-Google ""
--> https://www.esportelandia.com.br/skate/manobras-de-skate/
--> Trial & Error
--> Hardflip
+Google "Que sistema de informações permite a qualquer indivíduo, por meio da Internet, acesso amplo e facilitado a diversas bases de dados sobre planos e orçamentos públicos federais?"
+-> https://www12.senado.leg.br/noticias/materias/2005/06/13/senado-lanca-programa-siga-brasil-para-dar-mais-transparencia-aos-dados-orcamentarios
+-> Senado lança programa Siga Brasil...
 
-Resposta: hardflip
-
+Resposta: Siga Brasil

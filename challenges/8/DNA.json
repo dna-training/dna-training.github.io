@@ -1,6 +1,6 @@
 {
 	"image": "Imagem.jpg",
-	"resposta": "fonoaudiólogo",
-	"enunciado": "<p>Que profissional você recomendaria para o personagem ao lado?<br><br>Formatação da resposta: masculino</p>",
+	"resposta": "engenheiro cartográfico",
+	"enunciado": "<p>Que profissional poderia ajudá-lo a interpretar as informações da imagem ao lado?</p>",
 	"etapa": "Profissões"
 }

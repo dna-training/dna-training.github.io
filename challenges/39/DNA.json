@@ -1,7 +1,6 @@
 {
 	"image": "Imagem.jpg",
-	"resposta": "Tenochtitlán",
-	"enunciado": "<p>7 - Qual é o nome da antiga cidade que existia no lugar onde hoje está uma cidade moderna, cuja praça central você vê nesta foto?<br><br>Dica: Faça o download da foto em alta resolução. Existe uma pista escondida na foto. <a href=\"static/images/extra.jpg\" target='_blank'>Clique aqui para ver a foto.</a><br> </p>",
-	"etapa": "Atualidades",
-	"extra": "Extra.jpg"
+	"resposta": "Richard Matthew Stallman",
+	"enunciado": "<p>Um importante defensor do software livre foi retratado na foto ao lado.<br>Quem é ele?</p>",
+	"etapa": "Tecnologia"
 }

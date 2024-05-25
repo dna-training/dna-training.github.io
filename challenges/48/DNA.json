@@ -1,6 +1,7 @@
 {
-	"image": "Imagem.jpg",
-	"resposta": "Loki",
-	"enunciado": "<p>10 - Qual o nome do deus mitológico que fez com que um irmão matasse o outro?<br><br>Dica: Thor,<br>Dica da Érika: Cego</p>",
-	"etapa": "Curiosidades"
+	"image": false,
+	"resposta": "ocarina",
+	"enunciado": "<p>Que instrumento é este?</p><p></p><p>Dica: Jogo famoso da Nintendo<br><br>Obs: <a href=\"______\" target=\"_blank\">Clique aqui para ouvir o áudio.</a></p>",
+	"etapa": "Música",
+	"extra": "Audio.mp3"
 }

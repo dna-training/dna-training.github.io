@@ -1,8 +1,9 @@
 Google Images
--> Роулинг, Джоан
-  -> Joanne Rowling (J.K. Rowling)
+-> Aeschylus
 
-Google "qual palavra magica no harry potter significa mais leve que o ar"
--> Wingardium Leviosa
+Google "Aeschylus Trilogy"
+-> https://en.wikipedia.org/wiki/Oresteia
+-> Oresteia
+-> Agamemnon is the first of the three plays within the Oresteia trilogy...
 
-Resposta: Wingardium Leviosa
+Resposta: Agamemnon

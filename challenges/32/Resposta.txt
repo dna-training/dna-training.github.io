@@ -1,7 +1,7 @@
-Google "maior felino do mundo"
--> Ligre
+Imagem
+-> Terremoto
 
-Google "Ligre"
--> O ligre (em inglês: Liger)
+Google "medidor de terremoto"
+-> escala Richter
 
-Resposta: Liger
+Resposta: escala Richter

@@ -1,6 +1,6 @@
 {
-	"image": false,
-	"resposta": "arqueólogo",
-	"enunciado": "<p>7 - Qual a profissão do personagem de cinema Indiana Jones?</p>",
-	"etapa": "Profissões"
+	"image": "Imagem.jpg",
+	"resposta": "madagascar",
+	"enunciado": "<p>Qual é o país de origem deste animal?</p><p>Dica: Desenho animado</p>",
+	"etapa": "Curiosidades"
 }

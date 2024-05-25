@@ -1,6 +1,7 @@
 {
-	"image": false,
-	"resposta": "eco 92",
-	"enunciado": "<p>Como ficou conhecida a importante reunião para discutir o meio ambiente global realizada no Brasil na década de 90? (A resposta deve ser dada sem pontos, hífens e abreviações )</p>",
-	"etapa": "Vestibular"
+	"image": "Imagem.jpg",
+	"resposta": "Tenochtitlán",
+	"enunciado": "<p>7 - Qual é o nome da antiga cidade que existia no lugar onde hoje está uma cidade moderna, cuja praça central você vê nesta foto?<br><br>Dica: Faça o download da foto em alta resolução. Existe uma pista escondida na foto. <a href=\"______\" target='_blank'>Clique aqui para ver a foto.</a><br> </p>",
+	"etapa": "Atualidades",
+	"extra": "Extra.jpg"
 }

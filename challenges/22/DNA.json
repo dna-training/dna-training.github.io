@@ -1,7 +1,6 @@
 {
-	"image": false,
-	"resposta": "ocarina",
-	"enunciado": "<p>Que instrumento é este?</p><p></p><p>Dica: Jogo famoso da Nintendo<br><br>Obs: <a href=\"static/images/extra.mp3\" target=\"_blank\">Clique aqui para ouvir o áudio.</a></p>",
-	"etapa": "Música",
-	"extra": "Audio.mp3"
+	"image": "Imagem.jpg",
+	"resposta": "07:27",
+	"enunciado": "<p>Que horas o relógio ao lado está marcando?</p><p>Formatação da Resposta: 00:00</p><p>Dica: Linguagem de programação </p>",
+	"etapa": "Tecnologia"
 }

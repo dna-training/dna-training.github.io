@@ -3,31 +3,6 @@
   src="https://code.jquery.com/jquery-3.6.1.min.js"
   integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
   crossorigin="anonymous"></script>
-	<script>
-		function getID() {
-			return parseInt(localStorage.getItem('currentChallengeIndex'))
-		}
-
-		const directory = `/challenges/${getID()}`
-		let challengeInfo;
-		
-		fetch(`${directory}/DNA.json`)
-		.then(r => r.json())
-		.then(data => {
-			challengeInfo = data;
-		})
-		
-		function getChallengeInfo() {
-			return challengeInfo;
-		}
-		function resposta() {
-			fetch(`${directory}/Resposta.txt`)
-			.then(r => r.text())
-			.then(data => {
-				alert(data);
-			})
-		}
-	</script>
 	<script language="javascript">
 
 		
@@ -672,12 +647,7 @@ function Validar_Email(id)
  	}
  }
 
- function ContaCaracteres(campo){
- //usado para campos textarea onde não se tem o atributo maxlenght
- 	var campo = document.getElementById(campo);
-	var area = document.all("skin_tam_resposta2");
-    area.innerHTML = "Digitado(s): <b>" + campo.value.length + "</b>";
-  }
+ 
  
  
  
@@ -1840,104 +1810,6 @@ function Validar_Email_contato(email)
  <link rel= "stylesheet" type= "text/css" href= "/static/styles/estilos.css">
  <!-- <link href="css/estilo.css" rel="stylesheet" type="text/css"> -->
 
-<script>
-
-function enviar(val,des){
-  /*document.frmJogo.Parametro.value = val;
- // document.frmJogo.desistir.value = des;
-  document.frmJogo.target = "_self";
-  document.frmJogo.action = "console_desafio_semana.asp";
-  document.frmJogo.submit();*/
-  let host = location.hostname
-  let port = location.port
-  const answer = getChallengeInfo().resposta.toLowerCase()
-  getAnswer(function(resposta) {
-	if(document.frmJogo.txtResposta.value.toLowerCase() == answer) {
-		console.log("!")
-	} else {
-		console.log("X")
-	}
-  })
-  
-  // ENVIAR RESPOSTA
-}
-
-function do_enter(evento){
-  if (evento.keyCode == 13) {
-	event.preventDefault();
-     evento.keyCode = 0;
-	 enviar('4','0');
-  }
-}
-
-function mostra_recados(){
-  document.frmJogo.action = "http://www.dna2007.org/dna_equipe.asp";
-//  document.frmJogo.action = "http://localhost/dna2007/dna_recados.asp";
-  document.frmJogo.target = "_blank";
-  document.frmJogo.submit();
-}
-
-
-    function do_post()
-
-    {
-
-        if( document.frmJogo.nome.value == '' )
-
-        {
-
-            alert( 'Preencha o nome!' );
-
-            document.frmJogo.nome.focus();
-
-            return false;
-
-        }
-
-        if( document.frmJogo.email.value == '' )
-
-        {
-
-            alert( 'Preencha o email!' );
-
-            document.frmJogo.email.focus();
-
-            return false;
-
-        }
-
-        if( document.frmJogo.nome_amigo.value == '' )
-
-        {
-
-            alert( 'Preencha o nome do seu amigo!' );
-
-            document.frmJogo.nome_amigo.focus();
-
-            return false;
-
-        }
-
-        if( document.frmJogo.email_amigo.value == '' )
-
-        {
-
-            alert( 'Preencha o email do seu amigo!' );
-
-            document.frmJogo.email_amigo.focus();
-
-            return false;
-
-        }
-
-        document.frmJogo.Parametro.value = 7;
-
-        document.frmJogo.submit();
-
-    }
-
-
-</script>
 </head>
 <body class="tag_body_game">
 	<a href="https://www.instagram.com/desafionacional.oficial/"><img src="../static/images/Insta.jpg" alt="" width="107" height="111"></a><a href="https://www.facebook.com/Desafio-Nacional-Acad%C3%AAmico-105271808356431"><img src="../static/images/face.jpg" alt="" width="107" height="111"></a><br>  
@@ -1999,40 +1871,21 @@ function mostra_recados(){
 	  <div id="enunciado_questao" class="enunciado_questao" style="height:160px;width:370px;_width:398px"></div>
 	  <!--enunciado-->
 	</div>
-	<script>
-		const enunciado = getChallengeInfo().enunciado
-		
-		$(`<span class="arialCinza12"> <div style="text-align:center"><strong><font color="#FF0000">Esse desafio é somente para treino!<br></font></strong></div>${enunciado}</span>`)
-			.appendTo('[id=enunciado_questao]');
-	</script>
 	
 	  <div id="resposta_questao" class="resposta_questao" style="margin-left:2;_margin-left:0;position:relative; top:-42%;"> 
 		
 		<div class="arialAzul12" style="float:left; height:27px; padding-top:8px; padding-left:4px; position:relative; top:3px; _top:-35px; _top:0px"><b>Resposta:</b> 
 		  <input name="txtResposta" type="text" class="formulario" id="resposta" onkeypress="do_enter(event);" onkeyup="ContaCaracteres('resposta');" size="25" maxlength="9">
-		  &nbsp;
-			<script>
-			getAnswer(function(resposta) {
-				document.getElementById('resposta').setAttribute('maxlength', resposta.length)
-			})
-		  </script>		  
+		  &nbsp;  
 		  <input type="button" name="responder" value="Enviar" class="formulario" onclick="enviar('4','0');">
 		</div>
 		<div id="skin_tam_resposta" class="arialAzul12" style="float:left; height:32px; padding-top:1px; padding-left:4px; position:relative; top:3px;_top:-35px; _top:0px"><br>
-			<script>
-				getAnswer(function(resposta) {
-					document.getElementById("skin_tam_resposta").innerText = `${resposta.length} caracteres`
-					$('<div id="skin_tam_resposta2" class="arialAzul12">Digitado(s): <b>0</b></div>').appendTo('[id=skin_tam_resposta]')
-				});
-			  </script>
 		</div>
 	  </div>
 	 
 	
 	<!--resposta_questao-->
-	  <script>
-			document.frmJogo.txtResposta.focus()
-		 </script>
+
 	  
 	  <!--		   <div id="skin_conclusao_jogo" class="arialAzul18" style="padding-top:30px">
 			 <p>A primeira fase do DNA está concluída!
