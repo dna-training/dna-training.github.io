@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('loadChallenge', loadChallenge);
     document.addEventListener('setChallenge', setChallenge);
     document.addEventListener('resetChallenge', function() {
-        const confirmation = confirm("Tem certeza que quer reiniciar ao primeiro desafio?")
+        const confirmation = confirm("Tem certeza que quer voltar ao primeiro desafio?")
         if (confirmation) {
             localStorage.setItem('currentChallengeIndex', 1);
             loadChallenge()
