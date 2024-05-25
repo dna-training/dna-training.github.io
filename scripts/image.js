@@ -23,6 +23,10 @@ function enviar(val,des){
         const questionEvent = new Event('setChallenge');
         document.dispatchEvent(questionEvent);
         return;
+    } else if(val == "resetQuestion") {
+        const questionEvent = new Event('resetChallenge');
+        document.dispatchEvent(questionEvent);
+        return;
     }
 
     fetch(`${getDirectory()}/DNA.json`)
