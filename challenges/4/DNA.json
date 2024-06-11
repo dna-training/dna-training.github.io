@@ -1,6 +1,7 @@
 {
 	"image": false,
-	"resposta": "486",
-	"enunciado": "<p>4 - Qual processador devemos usar para que a igualdade abaixo seja verdadeira?</p><p>Intel + Microsoft + HP - processador = Google + Borland + 1414</p>",
-	"etapa": "Tecnologia"
+	"resposta": "museólogo",
+	"enunciado": "<p>Que profissional você contrataria para trabalhar na localidade representada pela letra \"T\"?<br><br><a href=\"______\" target=\"_blank\">Dica: Clique aqui!</a></p>",
+	"etapa": "Profissões",
+	"extra": "Imagem.gif"
 }
