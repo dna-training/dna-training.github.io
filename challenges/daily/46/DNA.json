@@ -1,0 +1,6 @@
+{
+	"image": false,
+	"resposta": "ping localhost",
+	"enunciado": "<p>Qual é o comando utilizado para verificar se sua placa de rede está respondendo?</p>",
+	"etapa": "Tecnologia"
+}

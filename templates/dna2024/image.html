@@ -1,0 +1,196 @@
+<head>
+<title>Treinamento DNA</title>
+<link href="/static/styles/estilos.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="tag_body_game" data-new-gr-c-s-check-loaded="14.1184.0" data-gr-ext-installed="">
+<br>Este website não é afiliado ao DNA (Desafio Nacional Acadêmico). Todos os modelos e desafios apresentados aqui pertencem à equipe do DNA e foram modificados para este website.<br>
+
+<!--BODY GAME-->
+ <form name="frmJogo" method="post"> 
+ <input type="hidden" name="desistir" value="0">
+ <input type="hidden" name="Parametro">
+ <input type="hidden" name="atualizar" value="0">
+ <input type="hidden" name="data_class" value="27/06/2024">
+ <input type="hidden" name="dia_semana" value="Quinta-feira">
+ <!--Valores retornados pela procedure proc_get_equipe-->
+ 
+ 
+ <!---Valores retornados pela procedure PROC_LISTA_ETAPAS_GRUPO-->
+ <input type="hidden" name="numero_etapa" value="1/11"> 
+ <input type="hidden" name="nome_etapa" value="Etapa: Curiosidades">
+ <input type="hidden" name="numero_equipes" value=""> 
+ <input type="hidden" name="aband_etapa" value="0/10">
+ <input type="hidden" name="quest_resp" value="1/10">
+ <input type="hidden" name="numero_questoes" value="10">
+ <input type="hidden" name="id_etapa_atual" value="">
+
+ <!--Valores retornados pela procedure PROC_ETAPAS_PENDENTES-->
+ <input type="hidden" name="cont_pendentes" value="">
+ <input type="hidden" name="data_conclusao" value="">
+ <input type="hidden" name="pontos" value="0">
+ <input type="hidden" name="total_equipes" value="337">
+ <input type="hidden" name="abandonados" value="">
+ <input type="hidden" name="desafio_final" value="">&nbsp;&nbsp;&nbsp;
+ <div id="body_game" class="body_game">
+		<!--LUZES-->
+		
+  <div id="luzes_game" class="luzes_game"> </div>
+		<!--FIM LUZES-->
+		
+   <!--MENU SUPERIOR-->
+       
+		    <div id="menu_superior_game" class="menu_superior_game">
+       
+
+        <div class="arialAzul12">Equipe</div> 
+
+        <div id="bt_game_e" class="bt_game_e"> <a title="Estatística"> 
+          <img src="./static/images/bt_game_e.gif" width="33" height="32" border="0"> </a> 
+        </div>
+    <!--    <div id="bt_game_e" class="bt_game_e">      <img src="images/bt_game_e.gif" width="33" height="32" border="0" /> </div>-->
+        <div id="titulo_game" class="titulo_game"> 
+          <div id="texto_titulo_game" class="texto_titulo_game"> <span class="arialAzul14" id="pontosepos"><b>Pontos: 
+            0 | Posição: </b></span> </div>
+        </div>
+        <div id="bt_game_r" class="bt_game_r"> <a title="Classificação"> 
+          <img src="./static/images/bt_game_r.gif" width="33" height="32" border="0"> </a> 
+        </div>
+    <!--    <div id="bt_game_r" class="bt_game_r">  
+          <img src="images/bt_game_r.gif" width="33" height="32" border="0" /> 
+        </div>-->
+        <div class="arialVerde12" style="height:18px; font-size:14px" id="etapadesafio"><b>Etapa: Curiosidades</b></div>
+      </div>
+  <!--FIM MENU SUPERIOR-->
+		
+		<!--PAINEL-->
+		
+		<div id="painel_game" class="painel_game">
+		  
+  <div id="corpo_interno_game" class="corpo_interno_game"> 
+    
+         <div id="rolatexto_skin" style="position:relative; top:-17%; left:-24%; _position:inherit;height:170px; _height:170px; width:213px; _width:249px;_float:left;background-color:#CCCC66;"> 
+			 <div id="enunciado_questao" class="enunciado_questao" style="width:210px; height:160px;"></div>
+		  <!--enunciado-->
+   </div>
+		  
+			 <div id="imagem_questao" class="imagem_questao"></div> 
+	<!--      <img src="etapas/swf_questoes/dna2024_curiosidades_01145as.jpg" width="165" height="166"> -->
+		  
+		<!--imagem_questao-->
+    
+         <div id="resposta_questao" class="resposta_questao" style="margin-left:2;_margin-left:0;width:413px;_width:415px;position:relative; top:-100%;"> 
+      
+        <div class="arialAzul12" style="float:left; height:27px; padding-top:8px; padding-left:4px; position:relative; top:3px; _top:-35px; _top:0px"><b>Resposta:</b> 
+		  
+            <input name="txtResposta" type="text" class="formulario" id="resposta" onkeypress="do_enter(event);" onkeyup="ContaCaracteres('resposta');" size="32" maxlength="8">
+          		  
+          &nbsp; 
+          <input type="button" name="responder" value="Enviar" class="formulario" onclick="enviar();">
+        </div>
+        <div id="skin_tam_resposta" class="arialAzul12" style="float:left; height:32px; padding-top:1px; padding-left:4px; position:relative; top:3px;_top:-35px; _top:0px">8 
+          caracteres<br>
+        </div>
+      </div>
+      <!--resposta_questao-->
+   <script>
+		    document.frmJogo.txtResposta.focus()
+		 </script>
+      
+      <!--		   <div id="skin_conclusao_jogo" class="arialAzul18" style="padding-top:30px">
+			 <p>A primeira fase do DNA est� conclu�da!
+		     <p>Aguardem o Enigma Final
+		   </div>-->
+      
+      <!--			   <div id="skin_conclusao_jogo" class="arialAzul18"  style="padding-top:30px">
+				  <P>A primeira fase do DNA est� conclu�da!
+				  <p>Aguardem o Enigma Final
+			   </div>-->
+      
+      <!--		   <div id="skin_conclusao_jogo" class="arialAzul18" style="padding-top:30px">
+			 <p>A primeira fase do DNA est� conclu�da!
+		     <p>Aguardem o Enigma Final
+		   </div> -->
+      
+    </div>
+    <!--corpo_interno_game-->
+  </div>
+  <!--painel_game-->
+		<!--FIM PAINEL-->
+
+
+
+
+		<!--FIM PAINEL-->
+
+		<!--MENU-->
+		
+  		       <div id="menu_game" class="menu_game" style="position:relative;">
+			 
+    <img src="./static/images/menu_game.png" width="187" height="73" border="0" usemap="#Map" style="position:absolute;left:0;"> 
+    <map name="Map" id="Map">
+      <area shape="circle" coords="34,34,28" href="#" onclick="enviar();" alt="Desafio" title="Desafio">
+      <area shape="circle" coords="107,45,22" href="#" onclick="resposta();" alt="Relatório" title="Relatório">
+<!--      <area shape="circle" coords="107,45,22" alt="Relat�rio" >-->
+      <area shape="circle" coords="165,30,17" href="#" onclick="enviar('setQuestion', 0);" alt="Pistas" title="Pistas">
+      <area shape="circle" coords="165,30,17" alt="Pistas">
+    </map>
+  </div>
+		<!--FIM MENU-->
+		
+		<!--BT AJUDA-->
+		
+		    <!--Chrome e IE11-->
+		    
+							     <div id="bt_ajuda_game" class="bt_ajuda_game" style="cursor:pointer; cursor:hand;position:relative;  top:-65.2%;_top:-58%; left:66.5%; _left:19.5%">
+							
+		     <div id="text_status" class="text_status" style="position:relative; top:30%; _top:25%; left:3%; _left:5%">
+	       
+      <span class="arialAzul12" title="Mensagens"><b>M</b></span> </div>
+  </div>
+		<!--FIM BT AJUDA-->
+		
+		<!--STATUS 01-->
+		
+	    <!--Chrome e IE11-->
+		    
+                               <div id="status01" class="status01" style="position:relative; top:-65.2%; _top:-58.5%; left:69%; _left:23%"> 
+                          
+    <div id="text_status" class="text_status" style="position:relative; top:31%; _top:25%"> <span class="arialAzul12" title="Etapa atual" id="etapaatual"><b>1/11</b></span> 
+    </div>
+  </div>
+		<!--FIM STATUS 01-->
+		
+		<!--STATUS 02-->
+	
+    <!--Chrome e IE11--> 		
+		 
+							   <div id="status02" class="status02" style="position:relative; top:-65.3%; _top:-58.5%; left:70%; _left:25%">
+						  	
+                <div id="text_status" class="text_status" style="position:relative; top:39%; _top:35%"> 
+				<span class="arialAzul12" title="Desafio atual" id="desafioatual"><b>1/10</b></span></div>
+			 
+  </div>
+		<!--FIM STATUS 02-->
+		
+		<!--STATUS 03-->
+	
+	<!--Chrome e IE11--> 
+		   
+								   <div id="status03" class="status03" style="position:relative; top:-65.2%; _top:-58.5%; left:69%; _left:23%"> 
+							   
+			    <div id="text_status" class="text_status" style="position:relative; top:38%;"> 
+			    <span class="arialAzul12" title="Desafios pulados nesta etapa"><b>0/10</b></span></div>
+              
+    </div>
+    <!--FIM STATUS 03-->
+    <!--ANUNCIO-->
+    <div id="anuncio" class="anuncio"> 
+      <!--<div id="anuncio" class="anuncio" style="margin-top:55px;margin-left:60px">
+        � 00h00 daremos um pequeno descanso �s mentes pensantes. Isto n�o � um recesso. � uma pausa para o caf�. Retornaremos � 00h20. -->
+    </div>
+    <!--FIM ANUNCIO-->
+  </div>
+	<!--FIM BODY GAME--> 
+	
+</form>

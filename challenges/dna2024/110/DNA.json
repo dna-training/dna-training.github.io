@@ -1,0 +1,7 @@
+{
+    "enunciado": "<p>A música abaixo faz parte de qual obra, coleção?<br>Use imagem ao lado como dica!<br>Formatação da resposta: nome em português.<br><br>Obs.: quando terminarem os 110 desafios, não se esqueçam das tarefas extras!<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "resposta": "o cravo bem temperado",
+    "imagem": "Imagem.jpg",
+    "etapa": "Surpresa",
+    "extra": "Extra.mp3"
+}

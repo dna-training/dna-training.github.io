@@ -1,5 +1,0 @@
-Google "programação fortran"
--> [...] primeiro compilador foi desenvolvido para o IBM 704 em 1954-57
-
-Resposta: IBM
-(todos foram criados pela IBM)

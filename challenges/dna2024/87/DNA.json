@@ -1,0 +1,7 @@
+{
+    "enunciado": "<p>Qual é o nome da música que está sendo cantada no vídeo abaixo?<br><br>Observação: o áudio do vídeo foi removido intencionalmente.<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "resposta": "follow that dream",
+    "imagem": false,
+    "etapa": "Música",
+    "extra": "Extra.mp4"
+}

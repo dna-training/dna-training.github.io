@@ -1,0 +1,190 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<script
+  src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+  crossorigin="anonymous"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>DNA - Desafio Nacional Acadêmico</title>
+
+ <!-- <link href="css/estilo_ff.css" rel="stylesheet" type="text/css" /> -->
+ <link rel= "stylesheet" type= "text/css" href= "/static/styles/estilos.css">
+ <!-- <link href="css/estilo.css" rel="stylesheet" type="text/css"> -->
+
+</head>
+<body class="tag_body_game">
+	<a href="https://www.instagram.com/desafionacional.oficial/"><img src="../static/images/Insta.jpg" alt="" width="107" height="111"></a><a href="https://www.facebook.com/Desafio-Nacional-Acad%C3%AAmico-105271808356431"><img src="../static/images/face.jpg" alt="" width="107" height="111"></a><br>  
+	Este website não é afiliado ao DNA (Desafio Nacional Acadêmico). Todos os modelos e desafios apresentados aqui pertencem à equipe do DNA e foram modificados para este website.<br>
+		<!--BODY GAME-->
+	 <form name="frmJogo" method="post"> 
+	 <input type="hidden" name="Parametro">
+	 <input type="hidden" name="atualizar" value="0">
+	 <input type="hidden" name="imagem_questao" value="etapas/desafio_diario/tecnologia_09_c_5jkoikg45o4a.jpg">
+	 <input type="hidden" name="ext_questao" value=".jpg">
+	 <input type="hidden" name="valor_questao" value="1500">
+	 <input type="hidden" name="id_questao" value="116">
+	 <input type="hidden" name="nome_etapa" value="Etapa: Tecnologia">
+	 <input type="hidden" name="tamanho" value="5">
+	 <input type="hidden" name="enunciado" value="Que horas o relógio ao lado está marcando?
+	<p>
+	Formatação da Resposta: 00:00
+	<p>
+	Dica: Linguagem de programação">
+	 <input type="hidden" name="id_desafio" value="3249">
+	 <input type="hidden" name="acertadores" value="4">
+	 <input type="hidden" name="enviado" value="">
+	 
+	 <div id="body_game" class="body_game">
+		<!--LUZES-->
+		
+	<div id="luzes_game" class="luzes_game"> </div>
+		<!--FIM LUZES-->
+		
+		<!--MENU SUPERIOR-->
+		
+		  <div id="menu_superior_game" class="menu_superior_game" style="text-align:center;">
+		
+			<div class="arialAzul12" id="etapadesafio"></div> 
+			<script>
+				document.getElementById("etapadesafio").innerText = `Etapa: ${getChallengeInfo().etapa}`
+			 </script>
+	<div id="bt_game_e" class="bt_game_e"> <img src="../static/images/bt_game_e.gif" width="33" height="32" border="0"> 
+	</div>
+	<div id="titulo_game" class="titulo_game"> 
+	  <div id="texto_titulo_game" class="texto_titulo_game"> <span class="arialAzul14"><b>Desafio 
+		de Hoje</b></span> </div>
+	</div>
+	<div id="bt_game_r" class="bt_game_r"> <img src="../static/images/bt_game_r.gif" width="33" height="32" border="0"> 
+	</div>
+	<div class="arialVerde12" style="height:18px; font-size:12px; color:#006600; float:left; _float:none; width:inherit"><b>4 pessoas resolveram este desafio até agora.</b></div>
+	</div>
+		<!--FIM MENU SUPERIOR-->
+		
+		<!--PAINEL-->
+		
+		<div id="painel_game" class="painel_game">
+		  
+	<div id="corpo_interno_game" class="corpo_interno_game"> 
+	
+	   <div id="rolatexto_skin" style="position:relative; top:-42%; left:0.5%; _position:inherit;height:170px;width:380px;_width:414px; _float:left;background-color:#CCCC66;"> 
+	<!--       <div id="rolatexto_skin" style="position:relative; top:-42%; left:0.5%; _position:inherit;height:170px;width:380px;_width:414px; _float:left;background-color:#CCCC66;"> -->
+	
+	  <div id="enunciado_questao" class="enunciado_questao" style="height:160px;width:370px;_width:398px"></div>
+	  <!--enunciado-->
+	</div>
+	
+	  <div id="resposta_questao" class="resposta_questao" style="margin-left:2;_margin-left:0;position:relative; top:-42%;"> 
+		
+		<div class="arialAzul12" style="float:left; height:27px; padding-top:8px; padding-left:4px; position:relative; top:3px; _top:-35px; _top:0px"><b>Resposta:</b> 
+		  <input name="txtResposta" type="text" class="formulario" id="resposta" onkeypress="do_enter(event);" onkeyup="ContaCaracteres('resposta');" size="25" maxlength="9">
+		  &nbsp;  
+		  <input type="button" name="responder" value="Enviar" class="formulario" onclick="enviar('4','0');">
+		</div>
+		<div id="skin_tam_resposta" class="arialAzul12" style="float:left; height:32px; padding-top:1px; padding-left:4px; position:relative; top:3px;_top:-35px; _top:0px"><br>
+		</div>
+	  </div>
+	 
+	
+	<!--resposta_questao-->
+
+	  
+	  <!--		   <div id="skin_conclusao_jogo" class="arialAzul18" style="padding-top:30px">
+			 <p>A primeira fase do DNA está concluída!
+			 <p>Aguardem o Enigma Final
+		   </div>-->
+	  
+	  <!--			   <div id="skin_conclusao_jogo" class="arialAzul18"  style="padding-top:30px">
+				  <P>A primeira fase do DNA está concluída!
+				  <p>Aguardem o Enigma Final
+			   </div>-->
+	  
+	  <!--		   <div id="skin_conclusao_jogo" class="arialAzul18" style="padding-top:30px">
+			 <p>A primeira fase do DNA está concluída!
+			 <p>Aguardem o Enigma Final
+		   </div> -->
+	  
+	</div>
+	<!--corpo_interno_game-->
+	</div>
+	<!--painel_game-->
+		<!--FIM PAINEL-->
+	
+	
+	
+	
+		<!--FIM PAINEL-->
+		
+		<!--MENU-->
+		
+				 <div id="menu_game" class="menu_game" style="position:relative;top:23.2%;left:22.3%;">
+					 <img src="../static/images/menu_game.png" style="position:relative;top:-89.5%;left:3%;" width="187" height="73" border="0" usemap="#Map"> 
+			  
+	<map name="Map" id="Map">
+	  <area shape="circle" coords="34,34,28" href="#" onclick="enviar('','0');" alt="Desafio" title="Desafio">
+	  <area shape="circle" coords="107,45,22" href="#" onclick="resposta();"  alt="Resposta" title="Resposta"> 
+  	  <!--<area shape="circle" coords="165,30,17" href="#" onClick="enviar('1','0');" alt="Pistas" title="Pistas" />-->
+	</map>
+	</div>
+		<!--FIM MENU-->
+		
+		<!--BT AJUDA-->
+		
+			<!--Se uma questão está sendo apresentada => var_parametro="2"-->
+			   <!--Questão sem imagem-->
+						   <div id="bt_ajuda_game" class="bt_ajuda_game" style="position:relative;  top:-42.5%;_top:-58%; left:66.7%; _left:19.5%">
+					  
+			<div id="text_status" class="text_status" style="position:relative; top:30%; _top:25%; left:3%; _left:5%">
+		
+	   </div>
+	</div>
+		<!--FIM BT AJUDA-->
+		
+		<!--STATUS 01-->
+		
+			<!--Se uma questão está sendo apresentada => var_parametro="2"-->
+			   <!--Questão sem imagem-->
+							   <div id="status01" class="status01" style="position:relative; top:-42.8%; _top:-58.5%; left:69%; _left:23%">
+					  
+			<div id="text_status" class="text_status" style="position:relative; top:30%; _top:25%; left:3%; _left:5%">
+	   
+	<!--<div id="text_status" class="text_status" style="position:relative; top:31%; _top:25%"> <span class="arialAzul12" title="Etapa atual"><b></b></span> 
+	</div>-->
+	</div>
+		<!--FIM STATUS 01-->
+		
+		<!--STATUS 02-->
+		
+			<!--Se uma questão está sendo apresentada => var_parametro="2"-->
+			   <!--Questão sem imagem-->
+							<div id="status02" onclick="enviar('setQuestion','0');" class="status02" style="cursor:pointer; cursor:hand;position:relative; top:102.8%; _top:-58.5%; left:10%; _left:25%">
+					  
+				<div id="text_status" class="text_status" style="cursor:pointer; cursor:hand;position:relative; top:32%; _top:35%"> <span class="arialAzul12" title="Enviar Desafio a um amigo"><b></b></span> </div>
+	   
+	</div> 
+		<!--FIM STATUS 02-->
+		
+		<!--STATUS 03-->
+		
+			<!--Se uma questão está sendo apresentada => var_parametro="2"-->
+			   <!--Questão sem imagem-->
+						   <div id="status03" onclick="enviar('resetQuestion','0');" class="status03" style="cursor:pointer; position:relative; top:104%; _top:-58.5%; left:-8%; _left:23%"> 
+					  
+	
+	 						 <div id="text_status" class="text_status" > <span class="arialAzul12" title="Reiniciar"><b>Reiniciar</b></span> 
+	  </div>
+	</div>
+	
+	<!--FIM STATUS 03-->
+	<!--ANUNCIO-->
+	<div id="anuncio" class="anuncio"> 
+	  <!--<div id="anuncio" class="anuncio" style="margin-top:55px;margin-left:60px">
+		À 00h00 daremos um pequeno descanso às mentes pensantes. Isto não é um recesso. É uma pausa para o café. Retornaremos à 00h20. -->
+	</div>
+	<!--FIM ANUNCIO-->
+	</div>
+	<!--FIM BODY GAME--> 
+	
+	
+	
+	
+	</div></form></body></html>

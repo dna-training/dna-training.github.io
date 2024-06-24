@@ -1,0 +1,7 @@
+{
+    "enunciado": "<p>Qual é o nome do instrumento musical que aparece no vídeo abaixo?<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "resposta": "fotoplayer",
+    "imagem": false,
+    "etapa": "Música",
+    "extra": "Extra.mp4"
+}

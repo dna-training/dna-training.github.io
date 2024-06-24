@@ -1,0 +1,7 @@
+{
+    "enunciado": "<p>Assista ao vídeo no link abaixo e responda o nome deste esporte inusitado. É um jogo de equipe que envolve muita estratégia, força e resistência.<br><br>Formatação da resposta: a sua resposta deve conter o hífen.<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "resposta": "bo-taoshi",
+    "imagem": false,
+    "etapa": "Esportes",
+    "extra": "Extra.mp4"
+}

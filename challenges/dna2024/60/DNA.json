@@ -1,0 +1,7 @@
+{
+    "enunciado": "<p>Use a imagem ao lado como dica para encontrar as palavras que estão faltando na imagem do link abaixo.<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "resposta": "zero hour",
+    "imagem": "Imagem.jpg",
+    "etapa": "Cinema",
+    "extra": "Extra.jpg"
+}

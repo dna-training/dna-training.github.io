@@ -1,9 +1,0 @@
-Por causa da encodificação em 1s e 0s, podemos assumir que o código está em binário.
-Portanto, iremos converter de binário para texto normal (ascii).
-
-Colocando o texto em um website que converte binário para texto, obtemos um texto enorme com várias letras e números.
-Procurando dentro destes números por alguma palavra, encontramos a palavra "intel".
-
-"...908u3intel10234..."
-
-Resposta: intel

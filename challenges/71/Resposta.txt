@@ -1,6 +1,0 @@
-Utilizei o Google na frase escrita nas instruções.
--> Site das nações unidas: declarações universais de direitos humanos
--> O idioma em questão era "Guarani", e utilizando o Ctrl + F, vemos que o texto estava escrito no Art. 3.
--> Mudando o idioma do site para português e olhando o Artigo 3, conseguimos a resposta.
-
-Resposta: Todo indivíduo tem direito à vida, à liberdade e à segurança pessoal.

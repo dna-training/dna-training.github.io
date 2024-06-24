@@ -1,6 +1,0 @@
-Google "arquitetura de rede para a distribuição de arquivos"
--> par-a-par
-
-O nome "par-a-par" é mais comummente expressada em inglês, "peer-to-peer"
-
-Resposta: peer-to-peer

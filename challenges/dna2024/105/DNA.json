@@ -1,0 +1,7 @@
+{
+    "enunciado": "<p>Qual é o nome do compositor da música abaixo?<br><br>Obs.: o áudio está exatamente como ele tem que estar! Logo, evitem enviar e-mail para Coordenação perguntando se o áudio está quebrado. ;)<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "resposta": "john cage",
+    "imagem": false,
+    "etapa": "Surpresa",
+    "extra": "Extra.mp3"
+}
