@@ -24,6 +24,10 @@ function enviar(val,des){
         const questionEvent = new Event('loadChallenge');
         document.dispatchEvent(questionEvent);
         return;
+    } else if(val == "skipQuestion") {
+        const questionEvent = new Event('skipQuestion');
+        document.dispatchEvent(questionEvent);
+        return;
     }
 }
 
