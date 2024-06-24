@@ -42,7 +42,7 @@
         </div>
     <!--    <div id="bt_game_e" class="bt_game_e">      <img src="images/bt_game_e.gif" width="33" height="32" border="0" /> </div>-->
         <div id="titulo_game" class="titulo_game"> 
-          <div id="texto_titulo_game" class="texto_titulo_game"> <span class="arialAzul14"><b>Pontos: 
+          <div id="texto_titulo_game" class="texto_titulo_game"> <span class="arialAzul14" id="pontosepos"><b>Pontos: 
             0 | Posição: </b></span> </div>
         </div>
         <div id="bt_game_r" class="bt_game_r"> <a onclick="enviar();" title="Classificação"> 
@@ -51,7 +51,7 @@
     <!--    <div id="bt_game_r" class="bt_game_r">  
           <img src="images/bt_game_r.gif" width="33" height="32" border="0" /> 
         </div>-->
-        <div class="arialVerde12" style="height:18px; font-size:14px"><b>Etapa: Curiosidades</b></div>
+        <div class="arialVerde12" style="height:18px; font-size:14px" id="etapadesafio"><b>Etapa: Curiosidades</b></div>
       </div>
   <!--FIM MENU SUPERIOR-->
 		
@@ -109,7 +109,7 @@
 			 
     <img src="./static/images/menu_game.png" width="187" height="73" border="0" usemap="#Map" style="position:absolute;left:0;"> 
     <map name="Map" id="Map">
-      <area shape="circle" coords="34,34,28" onclick="enviar('loadQuestion','0');" alt="Desafio" title="Desafio">
+      <area shape="circle" coords="34,34,28" href="#" onclick="enviar('loadQuestion','0');" alt="Desafio" title="Desafio">
     </map>
   </div>
 		<!--FIM MENU-->
@@ -132,7 +132,7 @@
 		    
   		                     <div id="status01" class="status01" style="position:relative; top:-43.6%; _top:-58.5%; left:69%; _left:23%">
                           
-    <div id="text_status" class="text_status" style="position:relative; top:31%; _top:25%"> <span class="arialAzul12" title="Etapa atual"><b></b></span> 
+    <div id="text_status" class="text_status" style="position:relative; top:31%; _top:25%"> <span class="arialAzul12" title="Etapa atual" id="etapaatual"><b></b></span> 
     </div>
   </div>
 		<!--FIM STATUS 01-->
@@ -144,7 +144,7 @@
 							  <div id="status02" class="status02" style="position:relative; top:-43.6%; _top:-58.5%; left:70%; _left:25%">
 						  	
                 <div id="text_status" class="text_status" style="position:relative; top:39%; _top:35%"> 
-				<span class="arialAzul12" title="Desafio atual"><b></b></span></div>
+				<span class="arialAzul12" title="Desafio atual" id="desafioatual"><b></b></span></div>
 			 
   </div>
 		<!--FIM STATUS 02-->
@@ -156,7 +156,7 @@
 								   <div id="status03" class="status03" style="position:relative; top:-43.6%; _top:-58.5%; left:69%; _left:23%"> 
 							   
 			    <div id="text_status" class="text_status" style="position:relative; top:38%;"> 
-			    <span class="arialAzul12" title="Desafios pulados nesta etapa"><b></b></span></div>
+			    <span class="arialAzul12" title="Desafios pulados nesta etapa"><b>0/10</b></span></div>
               
     </div>
     <!--FIM STATUS 03-->

@@ -91,7 +91,7 @@ fetch(`${getDirectory()}/DNA.json`)
         let answer = data.resposta.toLowerCase();
         document.getElementById("imagem_questao").style=`background: url('../challenges/dna2024/${getID()}/${data.imagem}') no-repeat;position:relative; left:60%; top:-100%;`
         document.getElementById('resposta').setAttribute('maxlength', answer.length)
-        document.getElementById("etapadesafio").innerText = `Etapa: ${data.etapa}`
+        document.getElementById("etapadesafio").innerHTML = `<b>Etapa: ${data.etapa}</b>`
         document.getElementById("skin_tam_resposta").innerText = `${answer.length} caracteres`
         document.getElementById("etapaatual").innerText = `${converted.topic}/11`
         document.getElementById("desafioatual").innerText = `${converted.question}/10`

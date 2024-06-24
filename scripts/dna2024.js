@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('dna2024ChallengeID', dna2024ChallengeID);
 
     function runTemplateScript(template) {
-        const types = ["image", "noimage"]
+        const types = ["image", "noimage", "answered"]
 
         types.forEach(x => {
             const existingScript = document.querySelector(`script[src="/scripts/dna2024/${x}.js"]`);
@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if(types.includes(template)) {
             const script = document.createElement('script');
             script.src = `/scripts/dna2024/${template}.js`;
+            document.body.appendChild(script);
+        } else if(template === "wrong" || template === "correct") {
+            const script = document.createElement('script');
+            script.src = `/scripts/dna2024/answered.js`;
             document.body.appendChild(script);
         }
         
