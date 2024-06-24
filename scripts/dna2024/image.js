@@ -27,7 +27,7 @@ function resposta() {
     fetch(`${getDirectory()}/DNA.json`)
     .then(r => r.json())
     .then(data => {
-        alert(data.resposta);
+        alert(`Resposta: ${data.resposta}`);
     })
 }
 
