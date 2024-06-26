@@ -1,0 +1,7 @@
+{
+	"image": "Imagem.jpg",
+	"resposta": "fish kitchen sugar water",
+	"enunciado": "<p>9 - Utilizando a imagem e a dica descubra o idioma falado no áudio e depois responda: Quais as 4 palavras mencionadas?<br><br>Obs.: A resposta deve ser em INGLÊS, singular, em ordem alfabética e usando um espaço entre cada palavra<br><br>Exemplo: Palavra01 Palavra02.<br><br><a href=\"______\" target=\"_blank\">Clique aqui para ouvir o áudio.</a><br><br>Dica: 1961</p>",
+	"etapa": "Idiomas",
+	"extra": "Audio.mp3"
+}
