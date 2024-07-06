@@ -1,0 +1,3 @@
+Para obter a resposta, resolva o sudoku.
+
+Resposta: 291348657
