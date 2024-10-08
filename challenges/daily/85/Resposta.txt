@@ -1,4 +1,4 @@
-Essa questão é extremamente malfeita. A pergunta pede que as 2 respostas de cada pergunta sejam somadas (ou seja, 6 respostas somadas no final) para obter um número final. Porém, a soma das 2 respostas já está incluída no ENUNCIADO de cada pergunta.
+Essa questão é extremamente malfeita. A questão pede que as 2 respostas de cada quebra-cuca sejam somadas (ou seja, 6 respostas somadas no final) para obter um número final. Porém, em cada pergunta, já está incluido  soma das 2 respostas de tal questão no enunciado.
 A primeira diz que tem 84 amigos totais;
 A segunda diz que existem 55 linhas totais;
 A terceira diz que haviam 42 jovens totais.
