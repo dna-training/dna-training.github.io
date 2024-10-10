@@ -1,6 +1,7 @@
 {
-    "enunciado": "<p>Analise a imagem abaixo e responda quem desenvolveu essa teoria?<br><br>Formatação da resposta: apenas o primeiro nome.<br><br>Clique aqui para baixar o arquivo</p>",
+    "enunciado": "<p>Analise a imagem abaixo e responda quem desenvolveu essa teoria?<br><br>Formatação da resposta: apenas o primeiro nome.<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
     "resposta": "douglas",
     "imagem": false,
-    "etapa": "Administração"
+    "etapa": "Administração",
+    "extra": "Imagem.jpg"
 }
