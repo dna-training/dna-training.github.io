@@ -1,0 +1,59 @@
+Essa questão é extremamente malfeita. A questão pede que as 2 respostas de cada quebra-cuca sejam somadas (ou seja, 6 respostas somadas no final) para obter um número final. Porém, em cada pergunta, já está incluido  soma das 2 respostas de tal questão no enunciado.
+A primeira diz que tem 84 amigos totais;
+A segunda diz que existem 55 linhas totais;
+A terceira diz que haviam 42 jovens totais.
+
+84 + 55 + 42 = 181
+
+Resposta: 181
+
+
+Porém, aqui está a solução de cada uma das perguntas:
+
+1) Amigos virtuais
+
+I + M = 84
+I = 3M
+
+3M + M = 84
+4M = 84
+M = 21 (Ou seja, Marcia tem 21 amigos)
+
+I + 21 = 84
+I = 63 (Isabela tem 63 amigos)
+
+Resposta #1: {21, 63}
+
+2) A redação
+
+D + R = 55
+D - R = 5
+
+2D = 60
+D = 30 (Daniel tinha 30 linhas)
+
+30 + R = 55
+R = 25 (Rodrigo tinha 25 linhas)
+
+Resposta #2: {30, 25}
+
+3) Festa de aniversário
+
+R + G = 42
+G = R + 8
+
+R = 34 - R
+2R = 34
+R = 17 (haviam 17 rapazes)
+
+G = 17 + 8
+G = 25 (25 garotas)
+
+Resposta #3: {17, 25}
+
+21 + 63 + 30 + 25 + 17 + 25 = 181*
+Resposta final: 181
+
+* Porém, é claro, como foi mencionado acima, não era necessário solucionar os problemas, já que todas as somas já estavam incluídas no enunciado de cada questão.
+
+
