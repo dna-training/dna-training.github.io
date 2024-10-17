@@ -1,0 +1,6 @@
+A resposta pede por 7 carácteres.
+No documento, existem apenas 7 palavras com 7 carácteres: boliche, esgrima, futebol, hipismo, iatismo, natação e triatlo.
+
+Chutando todas as palavras até que uma deles seja marcada como a resposta correta, obtemos a resposta do enigma.
+
+Resposta: esgrima
