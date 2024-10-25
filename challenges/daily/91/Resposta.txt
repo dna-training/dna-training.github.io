@@ -1,0 +1,5 @@
+A imagem ao lado mostra Jakarta, que fica na ilha Java na Indonésia.
+Java é uma linguagem de programação.
+O mascote de tal linguagem é o Duke.
+
+Resposta: duke
