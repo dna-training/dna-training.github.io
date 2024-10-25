@@ -1,0 +1,7 @@
+{
+	"image": false,
+	"resposta": "Rachmaninoff",
+	"enunciado": "<p>Qual o último nome da pessoa que compôs essa música?<br><br>Formatação da resposta: a sua resposta não tem \"v\"<br><br>Obs.: <a href=\"______\" target=\"_blank\">Clique aqui para ouvir a música.</a></p>",
+	"etapa": "Música",
+	"extra": "Extra.mp3"
+}
