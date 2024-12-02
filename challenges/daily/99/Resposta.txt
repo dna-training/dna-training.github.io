@@ -1,0 +1,4 @@
+Google "graos solicitados pela criacao de um jogo"
+-> O total de grãos de trigo solicitado pelo criador do jogo de xadrez é de 18 446 744 073 709 551 615 grãos.
+
+Resposta: 18446744073709551615
