@@ -1,0 +1,7 @@
+Nessa pode ser usado algum website/aplicativo AI com capacidade de transcrever o audio, que estã em alemão.
+
+Outra maneira de resolver o desafio é perceber que o indivíduo, no audio, menciona "Autobahn" (palavra alemã bem conhecida), e pesquisar:
+Google "Ano construção Autobahn"
+-> A primeira autoestrada pública da Alemanha, precursora da rede Autobahn, foi concluída em 1932
+
+Resposta: 1932
