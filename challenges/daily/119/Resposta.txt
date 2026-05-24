@@ -1,0 +1,5 @@
+Código morse:
+-> .... --- -- . -- ...- .. - .-. ..- ...- .. .- -. --- 
+-> homemvitruviano
+
+Resposta: homem vitruviano
