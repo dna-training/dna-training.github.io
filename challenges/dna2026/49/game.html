@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<!--
+╔══════════════════════════════════════════════════════════════════════════╗
+║                        OLÁ, CURIOSO(A).                                 ║
+║                                                                          ║
+║  Inspecionar o código faz parte do aprendizado — sem problemas.         ║
+║  Mas se a ideia era usar isso para resolver o desafio com               ║
+║  automação, saiba que não vai funcionar.                                 ║
+║                                                                          ║
+║  A sessão desta página carrega o identificador único da sua             ║
+║  equipe. Qualquer padrão de interação fora do esperado para             ║
+║  um jogador humano é detectado automaticamente — timing de              ║
+║  cliques, frequência de requisições, comportamento de sessão.           ║
+║                                                                          ║
+║  Ao ser detectada, a equipe é desclassificada automaticamente,          ║
+║  sem intervenção humana e sem direito a recurso.                         ║
+║                                                                          ║
+║  Use a IA para aprender — não para resolver por meio de                 ║
+║  script automatizado. Há uma diferença enorme entre as duas,            ║
+║  e o sistema sabe distinguir.                                            ║
+║                                                                          ║
+║  Boa sorte. 🧠                                                           ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+(O texto acima é o original da página DNA - eles tinham essa mensagem para os curiosos que abriram o painel F12 durante o desafio.
+Decidi mantê-lo aqui para preservar o máximo possível o desafio original - porém, nesse caso, a resposta está sim no código, pois o desafio é somente para treino.
+Porém, é claro, não use o código para achar a resposta... tente resolvê-lo!)
+-->
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SISTEMA</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #00ff41;
+  --green-dim: #00a028;
+  --green-dark: #003010;
+  --blue-screen: #0000aa;
+  --red: #ff3333;
+  --amber: #ffb000;
+  --black: #000;
+  --bg: #050a05;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--green);
+  font-family: 'Share Tech Mono', monospace;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9999;
+  opacity:0.3;
+}
+
+#stage {
+  width: min(900px, 98vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ── NETWORK SVG ── */
+#network-wrap {
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+#network-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Servidor SVG */
+.srv-body { fill: #0a1a0a; stroke: var(--green-dim); stroke-width: 1.5; }
+.srv-led { fill: var(--green); animation: ledBlink 1.5s infinite; }
+.srv-led2 { fill: var(--amber); animation: ledBlink 1.5s 0.5s infinite; }
+.srv-stripe { fill: none; stroke: #1a3a1a; stroke-width: 1; }
+@keyframes ledBlink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* Linhas de rede */
+.net-line {
+  fill: none;
+  stroke: var(--green-dim);
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+/* Computadores SVG */
+.mon-body { fill: #0a0a0a; stroke: #333; stroke-width: 1.5; rx: 2; }
+.mon-screen { fill: var(--green-dark); transition: fill 0.4s; }
+.mon-screen.bsod { fill: var(--blue-screen) !important; }
+.mon-screen.recover { fill: #001a00 !important; }
+.mon-stand { fill: #1a1a1a; }
+.mon-base { fill: #1a1a1a; }
+.mon-text { font-family: 'Share Tech Mono', monospace; font-size: 4px; fill: var(--green); }
+.mon-text.bsod-txt { fill: white; }
+
+/* Pacote UPDATE viajando */
+.pkg {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.pkg-box { fill: #001a00; stroke: var(--green); stroke-width: 1; rx: 2; }
+.pkg-txt { font-family: 'Orbitron', monospace; font-size: 5px; fill: var(--green); font-weight: 700; letter-spacing: 1px; }
+
+/* Scanlines nos monitors */
+.scanlines {
+  fill: url(#scan);
+  pointer-events: none;
+}
+
+/* ── INPUT ZONE ── */
+#input-zone {
+  width: min(700px, 95vw);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s;
+  margin-top: 8px;
+}
+#challenge-text {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--amber);
+  text-align: center;
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px var(--amber);
+}
+#input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: rgba(0,255,65,0.04);
+  border: 1px solid var(--green-dim);
+  border-radius: 3px;
+  padding: 10px 14px;
+}
+#prompt { color: var(--green); font-size: 13px; white-space: nowrap; }
+#arquivo-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--green);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  caret-color: var(--green);
+}
+#arquivo-input::placeholder { color: #1a3a1a; }
+#submit-btn {
+  background: transparent;
+  border: 1px solid var(--green-dim);
+  color: var(--green);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+#submit-btn:hover { background: var(--green); color: var(--black); box-shadow: 0 0 16px var(--green); }
+#feedback {
+  margin-top: 10px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-align: center;
+  min-height: 16px;
+}
+
+/* ── WIN ── */
+#win-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.97);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+#win-screen.show { display: flex; }
+#win-label { font-family:'Orbitron',monospace; font-size:11px; letter-spacing:8px; color:var(--green-dim); margin-bottom:24px; }
+#win-codigo {
+  font-family:'Orbitron',monospace;
+  font-size: clamp(32px,6vw,64px);
+  font-weight: 900;
+  letter-spacing: 10px;
+  color: var(--green);
+  text-shadow: 0 0 30px var(--green), 0 0 80px var(--green-dim);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100%{ text-shadow:0 0 30px var(--green),0 0 80px var(--green-dim); }
+  50%{ text-shadow:0 0 50px var(--green),0 0 120px var(--green-dim); }
+}
+</style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="network-wrap">
+    <svg id="network-svg" viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="scan" width="1" height="3" patternUnits="userSpaceOnUse">
+          <rect width="1" height="1" fill="rgba(0,0,0,0.15)"/>
+        </pattern>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- ── SERVIDOR ── -->
+      <g id="server" transform="translate(390,10)">
+        <!-- corpo -->
+        <rect x="0" y="0" width="120" height="80" rx="4" class="srv-body"/>
+        <!-- listras -->
+        <line x1="8" y1="18" x2="112" y2="18" class="srv-stripe"/>
+        <line x1="8" y1="34" x2="112" y2="34" class="srv-stripe"/>
+        <line x1="8" y1="50" x2="112" y2="50" class="srv-stripe"/>
+        <line x1="8" y1="66" x2="112" y2="66" class="srv-stripe"/>
+        <!-- LEDs -->
+        <circle cx="104" cy="12" r="3" class="srv-led"/>
+        <circle cx="104" cy="28" r="3" class="srv-led2"/>
+        <circle cx="104" cy="44" r="3" class="srv-led"/>
+        <circle cx="104" cy="60" r="3" class="srv-led2"/>
+        <!-- slot drives -->
+        <rect x="10" y="8" width="80" height="6" rx="1" fill="#0d200d" stroke="#1a3a1a" stroke-width="0.5"/>
+        <rect x="10" y="24" width="80" height="6" rx="1" fill="#0d200d" stroke="#1a3a1a" stroke-width="0.5"/>
+        <rect x="10" y="40" width="80" height="6" rx="1" fill="#0d200d" stroke="#1a3a1a" stroke-width="0.5"/>
+        <rect x="10" y="56" width="80" height="6" rx="1" fill="#0d200d" stroke="#1a3a1a" stroke-width="0.5"/>
+        <!-- label -->
+        <text x="60" y="76" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="6" fill="#00a028" letter-spacing="2">SERVER</text>
+        <!-- ponto de conexão -->
+        <circle cx="60" cy="80" r="3" fill="var(--green-dim)"/>
+      </g>
+
+      <!-- ── LINHAS DE REDE ── -->
+      <!-- linha vertical do servidor -->
+      <line x1="450" y1="90" x2="450" y2="130" class="net-line" id="vline"/>
+      <!-- linha horizontal -->
+      <line x1="50" y1="130" x2="850" y2="130" class="net-line" id="hline"/>
+      <!-- linhas verticais para cada monitor (9 monitores) -->
+      <line x1="50"  y1="130" x2="50"  y2="175" class="net-line"/>
+      <line x1="150" y1="130" x2="150" y2="175" class="net-line"/>
+      <line x1="250" y1="130" x2="250" y2="175" class="net-line"/>
+      <line x1="350" y1="130" x2="350" y2="175" class="net-line"/>
+      <line x1="450" y1="130" x2="450" y2="175" class="net-line"/>
+      <line x1="550" y1="130" x2="550" y2="175" class="net-line"/>
+      <line x1="650" y1="130" x2="650" y2="175" class="net-line"/>
+      <line x1="750" y1="130" x2="750" y2="175" class="net-line"/>
+      <line x1="850" y1="130" x2="850" y2="175" class="net-line"/>
+
+      <!-- ── MONITORES (9) ── -->
+      <!-- Monitor 0 -->
+      <g class="monitor-g" data-idx="0" transform="translate(22,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-0"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-0">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-0b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-0c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+      <!-- Monitor 1 -->
+      <g class="monitor-g" data-idx="1" transform="translate(122,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-1"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-1">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-1b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-1c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+      <!-- Monitor 2 -->
+      <g class="monitor-g" data-idx="2" transform="translate(222,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-2"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-2">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-2b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-2c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+      <!-- Monitor 3 -->
+      <g class="monitor-g" data-idx="3" transform="translate(322,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-3"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-3">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-3b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-3c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+      <!-- Monitor 4 -->
+      <g class="monitor-g" data-idx="4" transform="translate(422,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-4"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-4">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-4b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-4c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+      <!-- Monitor 5 -->
+      <g class="monitor-g" data-idx="5" transform="translate(522,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-5"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-5">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-5b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-5c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+      <!-- Monitor 6 -->
+      <g class="monitor-g" data-idx="6" transform="translate(622,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-6"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-6">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-6b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-6c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+      <!-- Monitor 7 -->
+      <g class="monitor-g" data-idx="7" transform="translate(722,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-7"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-7">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-7b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-7c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+      <!-- Monitor 8 -->
+      <g class="monitor-g" data-idx="8" transform="translate(822,175)">
+        <rect x="0" y="0" width="56" height="42" rx="2" class="mon-body"/>
+        <rect x="3" y="3" width="50" height="32" rx="1" class="mon-screen" id="ms-8"/>
+        <rect x="3" y="3" width="50" height="32" class="scanlines"/>
+        <text x="28" y="12" text-anchor="middle" class="mon-text" id="mt-8">&gt; SYS</text>
+        <text x="28" y="19" text-anchor="middle" class="mon-text" id="mt-8b">&gt; OK</text>
+        <text x="28" y="26" text-anchor="middle" class="mon-text" id="mt-8c">&gt; ██</text>
+        <rect x="24" y="42" width="8" height="8" rx="1" class="mon-stand"/>
+        <rect x="14" y="50" width="28" height="4" rx="2" class="mon-base"/>
+      </g>
+
+      <!-- ── PACOTES UPDATE (9) ── -->
+      <g id="pkg-0" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+      <g id="pkg-1" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+      <g id="pkg-2" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+      <g id="pkg-3" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+      <g id="pkg-4" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+      <g id="pkg-5" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+      <g id="pkg-6" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+      <g id="pkg-7" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+      <g id="pkg-8" class="pkg"><rect x="-18" y="-8" width="36" height="12" rx="2" class="pkg-box"/><text x="0" y="4" text-anchor="middle" class="pkg-txt">UPDATE</text></g>
+    </svg>
+  </div>
+
+  <div id="input-zone">
+    <div id="challenge-text">COMPLETE A LINHA DE COMANDO</div>
+    <div id="input-row">
+      <span id="prompt">del /f /q</span>
+      <input id="arquivo-input" type="text" placeholder="arquivo..." maxlength="18" autocomplete="off" spellcheck="false">
+      <button id="submit-btn" onclick="verificar()">EXEC</button>
+    </div>
+    <div id="feedback"></div>
+  </div>
+</div>
+
+<div id="win-screen">
+  <div id="win-label">sistema restaurado</div>
+  <div id="win-codigo">...</div>
+</div>
+
+<script>
+let fase = 0;
+const NUM = 9;
+const monX = [50,150,250,350,450,550,650,750,850];
+
+const RESPOSTA_CORRETA = /^C-00000291\*\.sys$/i;
+const CODIGO_FINAL = '19072024';
+
+function getScreen(i){ return document.getElementById('ms-'+i); }
+function getText(i,s){
+  const sfx = s===0?'':s===1?'b':'c';
+  return document.getElementById('mt-'+i+(sfx));
+}
+
+function animatePkg(i, delay){
+  const pkg = document.getElementById('pkg-'+i);
+  const tx = monX[i];
+  const startX = 450;
+  const startY = 90;
+  const midY = 130;
+  const endY = 175;
+
+  setTimeout(()=>{
+    pkg.style.opacity = '1';
+    let t = 0;
+    const step = 16;
+
+    const phase1 = setInterval(()=>{
+      t += step;
+      const prog = Math.min(t/400, 1);
+      const x = startX;
+      const y = startY + (midY - startY)*prog;
+      pkg.setAttribute('transform', `translate(${x},${y})`);
+      if(prog >= 1){ clearInterval(phase1); phase2(); }
+    }, step);
+
+    function phase2(){
+      t = 0;
+      const phase2i = setInterval(()=>{
+        t += step;
+        const prog = Math.min(t/500, 1);
+        const x = startX + (tx - startX)*prog;
+        const y = midY;
+        pkg.setAttribute('transform', `translate(${x},${y})`);
+        if(prog >= 1){ clearInterval(phase2i); phase3(); }
+      }, step);
+    }
+
+    function phase3(){
+      t = 0;
+      const phase3i = setInterval(()=>{
+        t += step;
+        const prog = Math.min(t/300, 1);
+        const x = tx;
+        const y = midY + (endY - midY)*prog;
+        pkg.setAttribute('transform', `translate(${x},${y})`);
+        if(prog >= 1){
+          clearInterval(phase3i);
+          pkg.style.opacity = '0';
+          bsod(i);
+        }
+      }, step);
+    }
+  }, delay);
+}
+
+function bsod(i){
+  const s = getScreen(i);
+  s.classList.add('bsod');
+  s.parentElement.querySelector('rect.mon-body').setAttribute('stroke','#0078d4');
+  getText(i,0).textContent = 'A problem';
+  getText(i,0).classList.add('bsod-txt');
+  getText(i,1).textContent = 'detected.';
+  getText(i,1).classList.add('bsod-txt');
+  getText(i,2).textContent = ':( ';
+  getText(i,2).classList.add('bsod-txt');
+}
+
+function recover(i){
+  const s = getScreen(i);
+  s.classList.remove('bsod');
+  s.classList.add('recover');
+  s.parentElement.querySelector('rect.mon-body').setAttribute('stroke','#333');
+  getText(i,0).textContent = '> FIXED';
+  getText(i,0).classList.remove('bsod-txt');
+  getText(i,1).textContent = '> OK ✓';
+  getText(i,1).classList.remove('bsod-txt');
+  getText(i,2).textContent = '';
+  getText(i,2).classList.remove('bsod-txt');
+}
+
+// Inicia animação
+const wrap = document.getElementById('network-wrap');
+setTimeout(()=>{
+  wrap.style.opacity = '1';
+  for(let i=0;i<NUM;i++){
+    animatePkg(i, 800 + i*200);
+  }
+  setTimeout(()=>{
+    const inp = document.getElementById('input-zone');
+    inp.style.opacity = '1';
+    inp.style.pointerEvents = 'auto';
+    document.getElementById('arquivo-input').focus();
+    fase = 1;
+    let b=0;
+    const bi = setInterval(()=>{
+      b++;
+      for(let i=0;i<NUM;i++){
+        const s=getScreen(i);
+        if(s.classList.contains('bsod')) s.style.opacity=b%2===0?'1':'0.7';
+      }
+      if(b>5) clearInterval(bi);
+    },250);
+  }, 800 + NUM*200 + 1500);
+}, 300);
+
+// Verificar — totalmente client-side
+const feedbackEl = document.getElementById('feedback');
+
+function verificar(){
+  if(fase<1) return;
+  const val = document.getElementById('arquivo-input').value.trim();
+  if(!val){ feedbackEl.style.color='var(--amber)'; feedbackEl.textContent='> INFORME O ARQUIVO'; return; }
+
+  if(RESPOSTA_CORRETA.test(val)){
+    fase=2;
+    for(let i=0;i<NUM;i++){
+      setTimeout(()=>recover(i), i*120);
+    }
+    setTimeout(()=>{
+      document.getElementById('win-codigo').textContent = CODIGO_FINAL;
+      document.getElementById('win-screen').classList.add('show');
+    }, NUM*120+600);
+  } else {
+    feedbackEl.style.color='var(--red)';
+    feedbackEl.textContent='> ARQUIVO INCORRETO';
+    for(let i=0;i<NUM;i++){
+      const s=getScreen(i);
+      if(s.classList.contains('bsod')){ s.style.opacity='0.4'; setTimeout(()=>s.style.opacity='1',300); }
+    }
+    document.getElementById('arquivo-input').value='';
+    document.getElementById('arquivo-input').focus();
+  }
+}
+
+document.getElementById('arquivo-input').addEventListener('keydown',e=>{ if(e.key==='Enter') verificar(); });
+</script>
+</body>
+</html>

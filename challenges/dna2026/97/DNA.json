@@ -1,0 +1,6 @@
+{
+    "resposta": "ludwig",
+    "enunciado": "<p>Use a imagem abaixo para identificar quem é a pessoa ao lado!<br><br>Formatação da resposta: apenas o primeiro nome.<br><br><a href=\"{$CD}/Extra.jpg\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "imagem": "Imagem.jpg",
+    "etapa": "Esportes"
+}

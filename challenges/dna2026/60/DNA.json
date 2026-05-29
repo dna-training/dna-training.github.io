@@ -1,0 +1,6 @@
+{
+    "resposta": "o agente secreto",
+    "enunciado": "<p>Analise a imagem disponível no link abaixo e responda: quem está faltando?<br><br><a href=\"{$CD}/Extra.jpg\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "imagem": "Imagem.jpg",
+    "etapa": "Cinema"
+}

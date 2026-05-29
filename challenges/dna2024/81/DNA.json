@@ -1,7 +1,6 @@
 {
-    "enunciado": "<p>Na imagem ao lado temos um livro indicado por uma seta amarela. Qual é o último nome do seu escritor?<br><br>Use o vídeo abaixo como ponto de partida para encontrar o livro!<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "enunciado": "<p>Na imagem ao lado temos um livro indicado por uma seta amarela. Qual é o último nome do seu escritor?<br><br>Use o vídeo abaixo como ponto de partida para encontrar o livro!<br><br><a href=\"{$CD}/Extra.mp4\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
     "resposta": "cross",
     "imagem": "Imagem.jpg",
-    "etapa": "Música",
-    "extra": "Extra.mp4"
+    "etapa": "Música"
 }

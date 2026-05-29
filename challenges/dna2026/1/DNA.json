@@ -1,0 +1,6 @@
+{
+    "imagem": "Imagem.jpg",
+    "resposta": "Artemis 4101",
+    "enunciado": "<p>De qual dos arqueiros a flecha foi mais longe? Quantas milhas a mais ela percorreu em relação à do outro arqueiro? Formato da resposta: nome do arqueiro, um espaço, quantidade de milhas a mais (somente números, sem separadores). Ex.: Robin 45854<br><br><a href=\"{$CD}/Extra.mp4\" target=\"_blank\">Assistir ao vídeo</a></p>",
+    "etapa": "Curiosidades"
+}

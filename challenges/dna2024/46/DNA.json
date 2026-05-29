@@ -1,7 +1,6 @@
 {
-    "enunciado": "<p>Qual o nome da máquina que pode ser observada na imagem disponivel no link abaixo?<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "enunciado": "<p>Qual o nome da máquina que pode ser observada na imagem disponivel no link abaixo?<br><br><a href=\"{$CD}/Extra.jpg\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
     "resposta": "Perkins Brailler",
     "imagem": false,
-    "etapa": "Tecnologia",
-    "extra": "Extra.jpg"
+    "etapa": "Tecnologia"
 }

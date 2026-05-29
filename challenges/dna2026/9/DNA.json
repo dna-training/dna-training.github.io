@@ -1,0 +1,6 @@
+{
+    "resposta": "despertador humano",
+    "enunciado": "<p>Qual o nome da profissão da pessoa no vídeo abaixo?<br><br>Formatação da resposta: Escreva o nome da profissão em português.<br><br><a href=\"{$CD}/Extra.mp4\" target=\"_blank\">Assista aqui ao vídeo!</a></p>",
+    "imagem": "Imagem.jpg",
+    "etapa": "Curiosidades"
+}

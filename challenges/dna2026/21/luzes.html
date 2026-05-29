@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════════════╗
+  ║                        OLÁ, CURIOSO(A).                                 ║
+  ║                                                                          ║
+  ║  Inspecionar o código faz parte do aprendizado — sem problemas.         ║
+  ║  Mas se a ideia era usar isso para resolver o desafio com               ║
+  ║  automação, saiba que não vai funcionar.                                 ║
+  ║                                                                          ║
+  ║  A sessão desta página carrega o identificador único da sua             ║
+  ║  equipe. Qualquer padrão de interação fora do esperado para             ║
+  ║  um jogador humano é detectado automaticamente — timing de              ║
+  ║  cliques, frequência de requisições, comportamento de sessão.           ║
+  ║                                                                          ║
+  ║  Ao ser detectada, a equipe é desclassificada automaticamente,          ║
+  ║  sem intervenção humana e sem direito a recurso.                         ║
+  ║                                                                          ║
+  ║  Para este desafio, o uso de qualquer tipo de automação,                ║
+  ║  script ou ferramenta externa não é permitido.                           ║
+  ║  A única solução válida é a resolução manual e correta do               ║
+  ║  desafio, pela sua própria cabeça.                                       ║
+  ║                                                                          ║
+  ║  Use a IA para aprender — não para resolver por meio de                 ║
+  ║  script automatizado. Há uma diferença enorme entre as duas,            ║
+  ║  e o sistema sabe distinguir.                                            ║
+  ║                                                                          ║
+  ║  Boa sorte. 🧠                                                           ║
+  ╚══════════════════════════════════════════════════════════════════════════╝
+
+(O texto acima é o original da página DNA - eles tinham essa mensagem para os curiosos que abriram o painel F12 durante o desafio.
+Decidi mantê-lo aqui para preservar o máximo possível o desafio original - porém, nesse caso, a resposta está sim no código, pois o desafio é somente para treino.
+Porém, é claro, não use o código para achar a resposta... tente resolvê-lo!)
+-->
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Luzes</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background:#f0f0eb;
+  font-family:'Courier New',monospace;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  min-height:100vh; padding:20px;
+  user-select:none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+}
+
+h1 { font-size:16px; letter-spacing:6px; color:#333; text-transform:uppercase; margin-bottom:6px; }
+#regra { font-size:13px; color:#555; letter-spacing:1px; margin-bottom:16px; text-align:center; line-height:1.8; }
+
+#topbar {
+  display:flex; align-items:center; justify-content:space-between;
+  width:100%; max-width:min(410px, 95vw);
+  margin-bottom:12px;
+}
+
+#moves { font-size:13px; color:#444; letter-spacing:1px; }
+
+#btn-reset {
+  background:none; border:1.5px solid #888; color:#444;
+  font-family:'Courier New',monospace; font-size:12px;
+  letter-spacing:2px; padding:6px 18px; cursor:pointer; text-transform:uppercase;
+  border-radius:4px;
+}
+#btn-reset:hover { border-color:#333; color:#222; }
+
+#grid { display:grid; gap:clamp(3px,1vw,5px); margin-bottom:0; }
+
+.cell {
+  width:clamp(34px,10vw,48px);
+  height:clamp(34px,10vw,48px);
+  border-radius:7px;
+  cursor:pointer; border:none;
+  transition:background 0.1s, box-shadow 0.1s;
+  touch-action:manipulation;
+}
+.cell.on { background:#f5c518; box-shadow:0 0 16px #f5c51866, 0 0 4px #f5c518; }
+.cell.off { background:#ccc; box-shadow:inset 0 2px 4px rgba(0,0,0,0.15); }
+.cell:hover { opacity:0.82; }
+
+#win {
+  display:none; position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(240,240,235,0.97);
+  flex-direction:column; align-items:center; justify-content:center; z-index:99;
+  padding:20px; text-align:center;
+}
+#win.show { display:flex; }
+#win-label { font-size:14px; letter-spacing:6px; color:#666; margin-bottom:24px; text-transform:uppercase; }
+#codigo {
+  font-size:clamp(32px,10vw,52px);
+  letter-spacing:clamp(4px,2vw,12px);
+  font-weight:bold; color:#111; margin-bottom:32px;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.6;} }
+
+@media (max-width: 400px) {
+  h1 { font-size:13px; letter-spacing:4px; }
+  #regra { font-size:11px; }
+  #moves { font-size:11px; }
+  #btn-reset { font-size:10px; padding:5px 12px; }
+}
+</style>
+</head>
+<body>
+
+<h1>Luzes</h1>
+<div id="regra">
+  acenda todas as luzes
+</div>
+<div id="topbar">
+  <div id="moves">movimentos: <span id="mc">0</span></div>
+  <button id="btn-reset">reiniciar</button>
+</div>
+<div id="grid"></div>
+
+<div id="win">
+  <div id="win-label">código</div>
+  <div id="codigo">...</div>
+</div>
+
+<script>
+const SIZE = 8;
+let TOKEN = '';
+const grid = document.getElementById('grid');
+const cellSize = Math.min(48, Math.floor((Math.min(window.innerWidth, 410) - 40) / SIZE));
+grid.style.gridTemplateColumns = `repeat(${SIZE}, ${cellSize}px)`;
+let moves = 0;
+
+function render(matrix) {
+  grid.innerHTML = '';
+  for(let r=0; r<SIZE; r++) {
+    for(let c=0; c<SIZE; c++) {
+      const btn = document.createElement('button');
+      btn.className = 'cell ' + (matrix[r][c] ? 'on' : 'off');
+      btn.addEventListener('click', (ev) => {
+        if(!ev.isTrusted) return;
+        enviarClique(r, c);
+      });
+      grid.appendChild(btn);
+    }
+  }
+}
+
+function isSolved(matrix) {
+  for(let r = 0; r < SIZE; r++) {
+    for(let c = 0; c < SIZE; c++) {
+      if(matrix[r][c] !== 1) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+function toggle(matrix, r, c) {
+  const dirs = [
+    [0,0],
+    [1,0],
+    [-1,0],
+    [0,1],
+    [0,-1]
+  ];
+
+  dirs.forEach(([dr, dc]) => {
+    const nr = r + dr;
+    const nc = c + dc;
+
+    if(nr >= 0 && nr < SIZE && nc >= 0 && nc < SIZE) {
+      matrix[nr][nc] = matrix[nr][nc] ? 0 : 1;
+    }
+  });
+}
+
+function enviarClique(r, c) {
+  toggle(STATE, r, c);
+
+  moves++;
+  document.getElementById('mc').textContent = moves;
+
+  render(STATE);
+  console.log(STATE);
+
+  if(isSolved(STATE)) {
+    document.getElementById('codigo').textContent = '8258965';
+    document.getElementById('win').classList.add('show');
+  }
+}
+
+document.getElementById('btn-reset').addEventListener('click', (ev) => {
+  window.location.reload()
+});
+
+// ── ANTI-INSPEÇÃO ────────────────────────────────────────────
+(function(){
+  // Bloquear teclas de inspeção
+  document.addEventListener('keydown', function(e){
+    var k = e.key || e.keyCode;
+    // F12
+    if(k === 'F12' || k === 123) { e.preventDefault(); e.stopPropagation(); return false; }
+    // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+    if(e.ctrlKey && e.shiftKey && (k==='I'||k==='J'||k==='C'||k===73||k===74||k===67)) { e.preventDefault(); return false; }
+    // Ctrl+U (ver fonte)
+    if(e.ctrlKey && (k==='u'||k==='U'||k===85)) { e.preventDefault(); return false; }
+    // Ctrl+S
+    if(e.ctrlKey && (k==='s'||k==='S'||k===83)) { e.preventDefault(); return false; }
+    // Ctrl+P (imprimir / copiar)
+    if(e.ctrlKey && (k==='p'||k==='P'||k===80)) { e.preventDefault(); return false; }
+  }, true);
+
+  // Bloquear botão direito
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); return false; }, true);
+
+  // Detectar DevTools aberto (truque de threshold de tamanho)
+  var _devCheck = setInterval(function(){
+    var threshold = 160;
+    if(
+      (window.outerWidth - window.innerWidth > threshold) ||
+      (window.outerHeight - window.innerHeight > threshold)
+    ){
+      clearInterval(_devCheck);
+      document.body.innerHTML = '';
+      window.location.reload();
+    }
+  }, 1000);
+
+  // Detectar debugger via timing
+  var _t = new Date();
+  (function devtoolsBlock(){})();
+  if(new Date() - _t > 100){
+    window.location.reload();
+  }
+})();
+
+let STATE = [[1,1,1,0,0,0,1,0],[1,1,1,0,1,0,0,1],[1,1,1,1,0,0,1,0],[1,0,1,0,0,0,1,0],[1,0,0,0,0,1,1,0],[0,0,1,1,0,1,0,0],[1,0,0,0,1,0,0,1],[0,0,1,1,1,0,0,0]];
+render(STATE);
+</script>
+</body>
+</html>

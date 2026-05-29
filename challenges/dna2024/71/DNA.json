@@ -1,7 +1,6 @@
 {
-    "enunciado": "<p>Qual é o último nome da pessoa que aparece neste vídeo?<br><br>Use a imagem ao lado como dica!<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "enunciado": "<p>Qual é o último nome da pessoa que aparece neste vídeo?<br><br>Use a imagem ao lado como dica!<br><br><a href=\"{$CD}/Extra.mp4\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
     "resposta": "Cousteau",
     "imagem": "Imagem.jpg",
-    "etapa": "Meio Ambiente",
-    "extra": "Extra.mp4"
+    "etapa": "Meio Ambiente"
 }

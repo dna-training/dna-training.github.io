@@ -1,0 +1,6 @@
+{
+    "resposta": "=n+1=4+1=5",
+    "enunciado": "<p>A imagem abaixo demonstra um encontro que nunca aconteceu! Use a imagem ao lado como dica e complete essa equação: =n+1_ _ _ _ _ _<br><br>Formatação da resposta: digite como resposta a equação completa.<br><br><a href=\"{$CD}/Extra.jpg\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "imagem": "Imagem.jpg",
+    "etapa": "Tecnologia"
+}

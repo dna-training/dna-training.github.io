@@ -1,7 +1,6 @@
 {
-    "enunciado": "<p>Usando a imagem ao lado como dica responda: Qual é o nome do jogo que fazia uso das bolas exibidas na imagem abaixo.<br><br><a href=\"______\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "enunciado": "<p>Usando a imagem ao lado como dica responda: Qual é o nome do jogo que fazia uso das bolas exibidas na imagem abaixo.<br><br><a href=\"{$CD}/Extra.jpg\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
     "resposta": "Chuiwan",
     "imagem": "Imagem.jpg",
-    "etapa": "Esportes",
-    "extra": "Extra.jpg"
+    "etapa": "Esportes"
 }

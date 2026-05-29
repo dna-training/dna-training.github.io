@@ -1,0 +1,6 @@
+{
+    "resposta": "NINTAIRYOKU",
+    "enunciado": "<p>Utilize a imagem ao lado como pista para encontrar o elemento comum que une todas as imagens do link abaixo. Após identificar esse elo, complete a URL com a palavra encontrada e acesse o link final para obter a sua resposta.<br><br>https://dna-training.github.io/challenges/dna2026/54/xxxxxxx_xxxxxxxx.html<br><br><a href=\"{$CD}/Extra.jpg\" target=\"_blank\">Clique aqui para baixar o arquivo</a></p>",
+    "imagem": "Imagem.jpg",
+    "etapa": "Cinema"
+}

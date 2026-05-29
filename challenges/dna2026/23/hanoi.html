@@ -1,0 +1,497 @@
+
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════════════╗
+  ║                        OLÁ, CURIOSO(A).                                 ║
+  ║                                                                          ║
+  ║  Inspecionar o código faz parte do aprendizado — sem problemas.         ║
+  ║  Mas se a ideia era usar isso para resolver o desafio com               ║
+  ║  automação, saiba que não vai funcionar.                                 ║
+  ║                                                                          ║
+  ║  A sessão desta página carrega o identificador único da sua             ║
+  ║  equipe. Qualquer padrão de interação fora do esperado para             ║
+  ║  um jogador humano é detectado automaticamente — timing de              ║
+  ║  cliques, frequência de requisições, comportamento de sessão.           ║
+  ║                                                                          ║
+  ║  Ao ser detectada, a equipe é desclassificada automaticamente,          ║
+  ║  sem intervenção humana e sem direito a recurso.                         ║
+  ║                                                                          ║
+  ║  Para este desafio, o uso de qualquer tipo de automação,                ║
+  ║  script ou ferramenta externa não é permitido.                           ║
+  ║  A única solução válida é a resolução manual e correta do               ║
+  ║  desafio, pela sua própria cabeça.                                       ║
+  ║                                                                          ║
+  ║  Use a IA para aprender — não para resolver por meio de                 ║
+  ║  script automatizado. Há uma diferença enorme entre as duas,            ║
+  ║  e o sistema sabe distinguir.                                            ║
+  ║                                                                          ║
+  ║  Boa sorte. 🧠                                                           ║
+  ╚══════════════════════════════════════════════════════════════════════════╝
+
+(O texto acima é o original da página DNA - eles tinham essa mensagem para os curiosos que abriram o painel F12 durante o desafio.
+Decidi mantê-lo aqui para preservar o máximo possível o desafio original - porém, nesse caso, a resposta está sim no código, pois o desafio é somente para treino.
+Porém, é claro, não use o código para achar a resposta... tente resolvê-lo!)
+-->
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Torre de Hanói</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#f0f0eb;
+  font-family:'Courier New',monospace;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  min-height:100vh; padding:20px;
+  user-select:none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+}
+h1 { font-size:16px; letter-spacing:6px; color:#333; text-transform:uppercase; margin-bottom:6px; }
+#regra { font-size:13px; color:#555; letter-spacing:1px; margin-bottom:16px; text-align:center; line-height:1.8; }
+#topbar {
+  display:flex; align-items:center; justify-content:space-between;
+  width:100%; max-width:min(700px, 98vw); margin-bottom:16px;
+}
+#moves { font-size:13px; color:#444; letter-spacing:1px; }
+#btn-reset {
+  background:none; border:1.5px solid #888; color:#444;
+  font-family:'Courier New',monospace; font-size:12px;
+  letter-spacing:2px; padding:6px 18px; cursor:pointer;
+  text-transform:uppercase; border-radius:4px;
+}
+#btn-reset:hover { border-color:#333; color:#222; }
+
+#hanoi {
+  display:flex; gap:clamp(4px,2vw,12px); align-items:flex-end;
+  margin-bottom:20px;
+  width:100%; max-width:min(700px,98vw);
+  justify-content:center;
+}
+
+.pino-wrap {
+  display:flex; flex-direction:column; align-items:center;
+  cursor:pointer; padding:clamp(4px,1vw,8px);
+  border-radius:8px;
+  border:2px solid transparent;
+  transition:border 0.15s, background 0.15s;
+  flex:1; max-width:200px;
+}
+.pino-wrap:hover { background:#e8e8e0; }
+.pino-wrap.selecionado { border:2px solid #f5c518; background:#fff8dc; }
+.pino-wrap.dragover { border:2px dashed #5cb85c; background:#f0fff0; }
+
+.pino-label {
+  font-size:11px; color:#888; letter-spacing:3px;
+  text-transform:uppercase; margin-bottom:8px;
+}
+
+.pino-area {
+  display:flex; flex-direction:column-reverse;
+  align-items:center;
+  width:100%; height:clamp(180px,35vw,300px);
+  position:relative;
+  justify-content:flex-end;
+}
+
+.haste {
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  width:clamp(5px,1.5vw,8px); height:100%;
+  background:#aaa; border-radius:4px;
+  bottom:0;
+}
+
+.base {
+  width:100%; height:12px;
+  background:#888; border-radius:4px;
+  margin-top:4px;
+}
+
+.disco {
+  position:relative; z-index:1;
+  height:clamp(18px,4vw,24px); border-radius:5px;
+  margin:2px 0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; color:rgba(255,255,255,0.7);
+  font-weight:bold; letter-spacing:1px;
+  cursor:grab;
+  transition:transform 0.1s, opacity 0.1s;
+}
+.disco:active { cursor:grabbing; }
+.disco.arrastando { opacity:0.4; }
+.disco.dragging-ghost {
+  position:fixed; z-index:1000;
+  pointer-events:none;
+  opacity:0.85;
+  transform:scale(1.05);
+  box-shadow:0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* Cores dos discos por tamanho — largura responsiva */
+.d1  { background:#e74c3c; width:clamp(22px,6vw,40px); }
+.d2  { background:#e67e22; width:clamp(36px,9vw,62px); }
+.d3  { background:#f1c40f; width:clamp(50px,12vw,84px); color:#333; }
+.d4  { background:#2ecc71; width:clamp(64px,15vw,106px); }
+.d5  { background:#3498db; width:clamp(78px,18vw,128px); }
+.d6  { background:#9b59b6; width:clamp(92px,21vw,150px); }
+.d7  { background:#1abc9c; width:clamp(106px,24vw,172px); }
+
+#instrucao {
+  font-size:12px; color:#888; letter-spacing:1px;
+  min-height:18px; margin-bottom:8px;
+}
+
+#win {
+  display:none; position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(240,240,235,0.97);
+  flex-direction:column; align-items:center; justify-content:center;
+  z-index:99; padding:20px; text-align:center;
+}
+#win.show { display:flex; }
+#win-label { font-size:14px; letter-spacing:6px; color:#666; margin-bottom:24px; text-transform:uppercase; }
+#codigo {
+  font-size:clamp(32px,10vw,52px);
+  letter-spacing:clamp(4px,2vw,12px);
+  font-weight:bold;
+  color:#111; margin-bottom:16px; animation:pulse 2s infinite;
+}
+#win-moves { font-size:13px; color:#888; letter-spacing:2px; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.6;} }
+
+@media (max-width: 400px) {
+  h1 { font-size:13px; letter-spacing:4px; }
+  #regra { font-size:11px; }
+  #moves { font-size:11px; }
+  #btn-reset { font-size:10px; padding:5px 12px; }
+  .pino-label { font-size:9px; letter-spacing:2px; }
+  #instrucao { font-size:10px; }
+}
+</style>
+</head>
+<body>
+
+<h1>Torre de Hanói</h1>
+<div id="regra">
+  mova todos os discos para o pino C<br>
+  nunca coloque um disco maior sobre um menor
+</div>
+
+<div id="topbar">
+  <div id="moves">movimentos: <span id="mc">0</span></div>
+  <button id="btn-reset">reiniciar</button>
+</div>
+
+<div id="instrucao">arraste um disco para mover</div>
+
+<div id="hanoi">
+  <div class="pino-wrap" id="pw0" onclick="clicarPino(0)">
+    <div class="pino-label">A</div>
+    <div class="pino-area" id="p0"><div class="haste"></div></div>
+    <div class="base"></div>
+  </div>
+  <div class="pino-wrap" id="pw1" onclick="clicarPino(1)">
+    <div class="pino-label">B</div>
+    <div class="pino-area" id="p1"><div class="haste"></div></div>
+    <div class="base"></div>
+  </div>
+  <div class="pino-wrap" id="pw2" onclick="clicarPino(2)">
+    <div class="pino-label">C</div>
+    <div class="pino-area" id="p2"><div class="haste"></div></div>
+    <div class="base"></div>
+  </div>
+</div>
+
+<div id="win">
+  <div id="win-label">código</div>
+  <div id="codigo">...</div>
+  <div id="win-moves"></div>
+</div>
+
+<script>
+(() => {
+  let estado = [[7,6,5,4,3,2,1],[],[]];
+  let movimentos = 0;
+
+  let dragPino = -1;
+  let ghost = null;
+
+  function renderizar() {
+    for(let p=0; p<3; p++) {
+      const area = document.getElementById('p' + p);
+      const haste = area.querySelector('.haste');
+      area.innerHTML = '';
+      area.appendChild(haste);
+
+      for(let i=0; i<estado[p].length; i++) {
+        const d = document.createElement('div');
+        const tam = estado[p][i];
+
+        d.className = 'disco d' + tam;
+        d.textContent = tam;
+
+        if(i === estado[p].length - 1) {
+          d.addEventListener('mousedown', (ev) => iniciarDrag(ev, p));
+          d.addEventListener('touchstart', (ev) => iniciarDragTouch(ev, p), {passive:false});
+        }
+
+        area.appendChild(d);
+      }
+    }
+  }
+
+  function iniciarDrag(ev, pino) {
+    ev.preventDefault();
+
+    if(estado[pino].length === 0) return;
+
+    dragPino = pino;
+
+    const disco = ev.target;
+
+    ghost = disco.cloneNode(true);
+    ghost.className = disco.className + ' dragging-ghost';
+    ghost.style.width = disco.offsetWidth + 'px';
+
+    document.body.appendChild(ghost);
+
+    moverGhost(ev.clientX, ev.clientY);
+
+    disco.classList.add('arrastando');
+
+    document.getElementById('instrucao').textContent =
+      'arraste para o pino destino';
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  }
+
+  function iniciarDragTouch(ev, pino) {
+    ev.preventDefault();
+
+    if(estado[pino].length === 0) return;
+
+    const touch = ev.touches[0];
+
+    dragPino = pino;
+
+    const disco = ev.target;
+
+    ghost = disco.cloneNode(true);
+    ghost.className = disco.className + ' dragging-ghost';
+    ghost.style.width = disco.offsetWidth + 'px';
+
+    document.body.appendChild(ghost);
+
+    moverGhost(touch.clientX, touch.clientY);
+
+    disco.classList.add('arrastando');
+
+    document.addEventListener('touchmove', onTouchMove, {passive:false});
+    document.addEventListener('touchend', onTouchEnd);
+  }
+
+  function moverGhost(x, y) {
+    if(!ghost) return;
+
+    ghost.style.left = (x - ghost.offsetWidth / 2) + 'px';
+    ghost.style.top = (y - ghost.offsetHeight / 2) + 'px';
+  }
+
+  function onMouseMove(ev) {
+    moverGhost(ev.clientX, ev.clientY);
+    destacarPino(ev.clientX, ev.clientY);
+  }
+
+  function onTouchMove(ev) {
+    ev.preventDefault();
+
+    const t = ev.touches[0];
+
+    moverGhost(t.clientX, t.clientY);
+    destacarPino(t.clientX, t.clientY);
+  }
+
+  function destacarPino(x, y) {
+    for(let p=0; p<3; p++) {
+      const pw = document.getElementById('pw'+p);
+      const rect = pw.getBoundingClientRect();
+
+      pw.classList.toggle(
+        'dragover',
+        x >= rect.left &&
+        x <= rect.right &&
+        y >= rect.top &&
+        y <= rect.bottom
+      );
+    }
+  }
+
+  function onMouseUp(ev) {
+    soltarDrag(ev.clientX, ev.clientY);
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  }
+
+  function onTouchEnd(ev) {
+    const t = ev.changedTouches[0];
+
+    soltarDrag(t.clientX, t.clientY);
+
+    document.removeEventListener('touchmove', onTouchMove);
+    document.removeEventListener('touchend', onTouchEnd);
+  }
+
+  function soltarDrag(x, y) {
+    if(ghost) {
+      ghost.remove();
+      ghost = null;
+    }
+
+    for(let p=0; p<3; p++) {
+      document.getElementById('pw'+p)
+        .classList.remove('dragover','selecionado');
+
+      document.getElementById('p'+p)
+        .querySelectorAll('.disco')
+        .forEach(d => d.classList.remove('arrastando'));
+    }
+
+    document.getElementById('instrucao').textContent =
+      'arraste um disco para mover';
+
+    let destino = -1;
+
+    for(let p=0; p<3; p++) {
+      const rect = document
+        .getElementById('pw'+p)
+        .getBoundingClientRect();
+
+      if(
+        x >= rect.left &&
+        x <= rect.right &&
+        y >= rect.top &&
+        y <= rect.bottom
+      ) {
+        destino = p;
+        break;
+      }
+    }
+
+    if(destino === -1 || destino === dragPino) {
+      dragPino = -1;
+      return;
+    }
+
+    const origem = dragPino;
+    dragPino = -1;
+
+    moverDisco(origem, destino);
+  }
+
+  function moverDisco(origem, destino) {
+    if(estado[origem].length === 0) {
+      document.getElementById('instrucao').textContent =
+        'pino vazio — escolha outro';
+      return;
+    }
+
+    const disco = estado[origem][estado[origem].length - 1];
+    const topoDestino = estado[destino][estado[destino].length - 1];
+
+    if(topoDestino && disco > topoDestino) {
+      document.getElementById('instrucao').textContent =
+        'movimento proibido: nunca coloque um disco maior em cima de um menor!';
+      return;
+    }
+
+    estado[origem].pop();
+    estado[destino].push(disco);
+
+    movimentos++;
+
+    document.getElementById('mc').textContent = movimentos;
+
+    renderizar();
+
+    verificarVitoria();
+  }
+
+  function verificarVitoria() {
+    if(estado[2].length === 7) {
+      document.getElementById('codigo').textContent = '3269485';
+
+      document.getElementById('win-moves').textContent =
+        movimentos + ' movimentos';
+
+      document.getElementById('win').classList.add('show');
+    }
+  }
+
+  document.getElementById('btn-reset')
+    .addEventListener('click', () => {
+
+      estado = [[7,6,5,4,3,2,1],[],[]];
+
+      movimentos = 0;
+
+      document.getElementById('mc').textContent = 0;
+
+      document.getElementById('instrucao').textContent =
+        'arraste um disco para mover';
+
+      document.getElementById('win').classList.remove('show');
+
+      renderizar();
+    });
+
+// ── ANTI-INSPEÇÃO ────────────────────────────────────────────
+(function(){
+  // Bloquear teclas de inspeção
+  document.addEventListener('keydown', function(e){
+    var k = e.key || e.keyCode;
+    // F12
+    if(k === 'F12' || k === 123) { e.preventDefault(); e.stopPropagation(); return false; }
+    // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+    if(e.ctrlKey && e.shiftKey && (k==='I'||k==='J'||k==='C'||k===73||k===74||k===67)) { e.preventDefault(); return false; }
+    // Ctrl+U (ver fonte)
+    if(e.ctrlKey && (k==='u'||k==='U'||k===85)) { e.preventDefault(); return false; }
+    // Ctrl+S
+    if(e.ctrlKey && (k==='s'||k==='S'||k===83)) { e.preventDefault(); return false; }
+    // Ctrl+P (imprimir / copiar)
+    if(e.ctrlKey && (k==='p'||k==='P'||k===80)) { e.preventDefault(); return false; }
+  }, true);
+
+  // Bloquear botão direito
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); return false; }, true);
+
+  // Detectar DevTools aberto (truque de threshold de tamanho)
+  var _devCheck = setInterval(function(){
+    var threshold = 160;
+    if(
+      (window.outerWidth - window.innerWidth > threshold) ||
+      (window.outerHeight - window.innerHeight > threshold)
+    ){
+      clearInterval(_devCheck);
+      document.body.innerHTML = '';
+      window.location.reload();
+    }
+  }, 1000);
+
+  // Detectar debugger via timing
+  var _t = new Date();
+  (function devtoolsBlock(){})();
+  if(new Date() - _t > 100){
+    window.location.reload();
+  }
+})();
+
+  renderizar();
+})();
+</script>
+</body>
+</html>

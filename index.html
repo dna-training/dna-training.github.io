@@ -1,51 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treinamento DNA</title>
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: url('static/images/body_game.jpg') center center / cover fixed;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
+            justify-content: center;
         }
-        .container {
+
+        .panel {
+            background: rgba(255, 255, 255, 0.96);
+            border: 2px solid #b0b0b0;
+            border-radius: 4px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+            width: 360px;
+            padding: 32px 36px 28px;
             text-align: center;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1 {
-            margin-bottom: 20px;
+
+        .panel h1 {
+            font-size: 22px;
+            color: #003399;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
         }
-        .button {
-            display: inline-block;
-            margin: 10px;
-            padding: 15px 30px;
-            font-size: 16px;
-            color: white;
-            background-color: #007BFF;
+
+        .panel .subtitle {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 28px;
+        }
+
+        .divider {
             border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
+            border-top: 1px solid #ddd;
+            margin-bottom: 24px;
         }
-        .button:hover {
-            background-color: #0056b3;
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: block;
+            padding: 13px 20px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            transition: filter 0.15s, transform 0.1s;
+            border: 1px solid transparent;
+        }
+        .btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+        .btn:active { transform: translateY(0); }
+
+        .btn-daily {
+            background-color: #0055cc;
+            color: #fff;
+            border-color: #0044aa;
+        }
+        .btn-2024 {
+            background-color: #1a7a1a;
+            color: #fff;
+            border-color: #155e15;
+        }
+        .btn-2026 {
+            background-color: #8a4f00;
+            color: #fff;
+            border-color: #6b3d00;
+        }
+
+        .btn small {
+            display: block;
+            font-weight: normal;
+            font-size: 11px;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        .disclaimer {
+            margin-top: 22px;
+            font-size: 10px;
+            color: #aaa;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Escolha um desafio</h1>
-        <a href="/daily" class="button">Desafios aleatórios</a>
-        <a href="/2024" class="button">110 desafios DNA 2024</a>
+    <div class="panel">
+        <h1>Treinamento DNA</h1>
+        <p class="subtitle">Desafio Nacional Acadêmico — Simulador</p>
+        <hr class="divider">
+        <div class="btn-group">
+            <a href="/daily" class="btn btn-daily">
+                Desafios Aleatórios
+                <small>Banco de desafios diários</small>
+            </a>
+            <a href="/2024" class="btn btn-2024">
+                DNA 2024
+                <small>110 desafios da competição</small>
+            </a>
+            <a href="/2026" class="btn btn-2026">
+                DNA 2026
+                <small>110 desafios da competição</small>
+            </a>
+        </div>
+        <p class="disclaimer">
+            Este site não é afiliado ao DNA (Desafio Nacional Acadêmico).<br>
+            Os desafios pertencem à equipe do DNA.
+        </p>
     </div>
 </body>
 </html>

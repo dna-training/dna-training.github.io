@@ -79,10 +79,7 @@ fetch(`${getDirectory()}/DNA.json`)
 
 
         let enunciado = data.enunciado;
-        if (enunciado.includes("______")) {
-            const split = enunciado.split("______");
-            enunciado = split[0] + `${getDirectory()}/${data.extra}` + split[1]
-        }
+        enunciado = enunciado.replaceAll('{$CD}', getDirectory());
         const span = document.createElement('span');
         span.classList.add('arialCinza12');
         span.innerHTML = enunciado;

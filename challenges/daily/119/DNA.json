@@ -1,7 +1,6 @@
 {
-	"image": false,
-	"resposta": "homem vitruviano",
-	"enunciado": "<p>Qual a palavra ? <a href=\"______\" target=\"_blank\">Clique aqui para ouvir.</a></p>",
-	"etapa": "Surpresa",
-	"extra": "Extra.mp3"
+    "image": false,
+    "resposta": "homem vitruviano",
+    "enunciado": "<p>Qual a palavra ? <a href=\"{$CD}/Extra.mp3\" target=\"_blank\">Clique aqui para ouvir.</a></p>",
+    "etapa": "Surpresa"
 }

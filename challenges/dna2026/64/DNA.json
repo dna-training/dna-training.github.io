@@ -1,0 +1,6 @@
+{
+    "resposta": "flutter aeroelástico",
+    "enunciado": "<p>Qual o verdadeiro fenômeno físico que causou o desastre registrado no vídeo abaixo?<br><br>Formatação da resposta: o fenômeno tem duas palavras, escreva a primeira em inglês e a segunda em português.<br><br><a href=\"{$CD}/Extra.mp4\" target=\"_blank\">Assista ao vídeo aqui!</a></p>",
+    "imagem": false,
+    "etapa": "Ciências"
+}
